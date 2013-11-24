@@ -9,4 +9,4 @@ Branches
 --------
 
 + `master`: Finished exercises.
-+ `draft: Non-compiling or non-finishing exercises.
++ `draft`: Non-compiling or non-finishing exercises.
