@@ -1,0 +1,193 @@
+\documentclass{article}
+
+\usepackage{xltxtra}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\setmathfont{xits-math.otf}
+
+\tikzset{node distance=2cm, auto}
+
+\author{Víctor López Juan}
+\title{Chapter 1}
+
+\begin{document}
+
+\begin{enumerate}
+  \item[12.]
+    \begin{lemma}\label{lem:one}
+      For every filter $F$, $1 ∈ F$.
+    \end{lemma}
+    \begin{proof}
+      F is non empty. Let $a ∈ F$. By defintion of Boolean Algebra,
+      $1 ∈ B$, $a ≤ 1$. By definition of filter, $1 ∈ F$.
+    \end{proof}
+    
+    \begin{lemma}
+      The intersection of two filters F₁, F₂ is a filter F.
+    \end{lemma}
+    \begin{proof}
+      By lemma \ref{lem:one}, 1 ∈ F₁ ∩ F₂ = F, so F is non-empty.
+
+      Let $a ∈ F$, $b ∈ B$, $a ≤ b$.
+
+      By the definition of filter, $a ∈ F₁ ⇒ b ∈ F₁$, and $a ∈ F₂ ⇒ b ∈ F₂$.
+      Therefore, $b ∈ F$.
+
+      Analogously, $a ∈ F$ and $b ∈ F$ implies $a ∧ b ∈ F$.
+    \end{proof}
+
+    \begin{lemma}
+      A boolean algebra can be characterized by the following properties:
+    \end{lemma}
+    
+    
+    
+    \begin{lemma}
+     Let F be a filtter
+     F is an ultrafilter iff for every b ∈ B, b ∈ F <=> ¬b !∈ F
+    \end{lemma}
+
+    \begin{proof}
+      \begin{description}
+        \item[$⇒$]
+
+          Let F be an ultrafilter.
+
+          Let ¬F = {¬b | b ∈ F}. F and ¬F are disjoint.
+
+          Let R = B\(F ∪ ¬F).
+
+          If R = ∅, then, we're finished.
+
+          Else, let x ∈ R. x !∈ F; therefore, for all y ∈ F, ¬(y ≤ x),
+          which implies x ≤ y.
+
+          /Observation:/ For every filter, 1 ∈ F. Therefore, 0 !∈ R, so
+          x ≠ 0.
+
+          Let $F' = { c | x ≤ c }$
+
+          \begin{enumerate}
+            \item F' is a filter.
+            \item 0 !∈ F', therefore, F' is proper.
+            \item F ⊂ F'
+          \end{enumerate}
+
+          Therefore, F is not an ultrafilter. Contradiction.
+          
+       \item[$⇐$]
+
+         $b ≠ ¬b$ for every b ∈ B.
+
+         Assume $b = ¬b$. Then, b ∧ b = 0, therefore, b = 0.
+
+         0 = ¬0.
+
+         Now, for all a, $a ∧ 0 ≤ a ∧ 0$. Therefore, $a ∧ 0 ≤ 0$ (by definition
+         of boolean algebra), which implies $a ∧ 0 = 0$ (by antisymmetry).
+
+         But this implies $(a ∧ ¬0) = 0$, and, therefore, a ≤ 0.
+
+         So there can't be
+
+         Now, if F satisfies the property, and F is a filter, then, it's
+         maximal: any bigger filter F' must contain some β !∈ F, so
+         ¬β ∈ F. That implies 0 ∈ F'. If 0 ∈ F', all elements greater
+         than 0 are in F'; which means all the elements in the algebra.
+
+      \end{description}
+         
+    \end{proof}
+
+    \begin{lemma}
+      There is an isomorphism between homomorphisms $h : B → 2$ and
+      ultrafilters.
+    \end{lemma}
+
+    \begin{proof}
+      Let M be the canonical isomorphism between subsets of B and
+      characteristic functions $B → 2$.
+      
+      M :     P(B)  →  (B → 2)
+              U    |→   χ_U
+
+      M^{-1} :  (B → 2) → P(B)
+               f       |-> { b | b ∈ B, f(b) = 1 }
+
+
+      M is biyective, and M^{-1} is it's inverse.
+
+      We only need to prove that M maps ultrafilters to homomorfisms,
+      and viceversa for M^{-1}:
+      
+      \begin{itemize}
+        \item
+
+          Let U be an ultrafilter.
+
+          χ_U(0) = 0
+
+          χ_U(1) = 1
+
+          Complement:
+          
+          χ_U(¬a) = 0 iff χ_U(a) = 1 , therefore : ¬χ_U(a) = χ_U(¬a)
+
+          Meet:
+          
+          if a !∈ U or b !∈ U, then a ∧ b !∈ U (because U is a filter,
+          and $a ∧ b ≤ a$, $a ∧ b ≤ b$).
+
+          If they both belong, then their intersection belongs, because
+          U is a filter.
+
+          Therefore, χ_U(a ∧ b) = χ_U(a) ∧ χ_U(b).
+
+          For join:
+
+          If a or b ∈ U, then a ≤ a ∨ b or b ≤ a ∨ b, so a ∨ b ∈ U.
+
+          Assume that a ∨ b ∈ U. If a ∈ U or b ∈ U, then we're finished.
+
+          Else, ¬a ∈ U, and ¬b ∈ U (because U is ultrafilter).
+
+          Also, (¬a ∧ ¬b) ∈ U, because U is filter.
+
+          
+          % TODO, prove distribuitivity, prove that (¬a ∧ ¬b) ≤ ¬(a ∨ b), done (because ultrafilter, and (a ∨ b) ∈ u ).
+          
+          + For order:
+
+          Assume a ≤ b. Then, either:
+
+          a ∈ U. Then b ∈ U, χ_U(a) = 1 ≤ 1 = χ_U(b)
+          
+          a !∈ U. Then, χ_U(a) = 0 ≤ χ_U(b)
+          
+        \itemize
+
+          Let h be an homomorfism. Then, let F = h^{-1}(1):
+
+          \begin{itemize}
+            \item For every b in B, if h(b) = 0, then h(¬b) = ¬h(b) = 1.
+              Therefore, either b in F, or ¬b in F.
+
+            \item F is a filter:
+
+              if a ∈ F, a ≤ b, then h(a) = 1 ≤ h(b) ⇒ b ∈ F
+              if a, b ∈ F, h(a) = h(b) = 1, so 1 = h(a) ∧ h(b) = h(a ∧ b) = 1.
+              
+          \end{itemize}
+
+          Therefore, F is an ultrafilter.
+
+      \end{itemize}
+
+
+\end{enumerate}
+
+
+\end{document}
+  
