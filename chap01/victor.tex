@@ -4,6 +4,9 @@
 \usepackage{xltxtra}
 \usepackage{amsmath}
 \usepackage{tikz}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\setmathfont{xits-math.otf}
 
 \tikzset{node distance=2cm, auto}
 
@@ -22,17 +25,16 @@
     diagram commutes:
 
     \begin{tikzpicture}
-      
-      \node (A) {$A$}
-      \node (B) [right of=A] {$B$}
-      \node (2) [below of=B] {$\text{\bf 2}$}
-      \draw[->] (A) to node {$f$} (B)
-      \draw[->] (A) to node {$j$} (2)
-      \draw[->] (A) to node {$k$} (2)
+      \node (A) {$A$};
+      \node (B) [right of=A] {$B$};
+      \node (2) [below of=B] {$\text{\bf 2}$};
+      \draw[->] (A) to node {$f$} (B);
+      \draw[->] (A) to node {$j$} (2);
+      \draw[->] (B) to node {$k$} (2);
     \end{tikzpicture}
 
     \begin{equation}
-    \begin{array}
+    \begin{array}{rll}
       F : & Sets/2           & → Sets × Sets              \\
           & α : (X → 2)      & → α^{-1}(a) × α^{-1}(b)      \\
           & \bar{f} : α → β  & → <f|α^{-1}(a), f|α^{-1}(b)>  \\
@@ -48,12 +50,14 @@
     $F(id_{A→2}) = id_{α^{-1}(a)×α^{-1}(b)}$
 
     And, if $\bar{g} : α → β$, $\bar{f} : β → γ$
-    $$
-       & F(\bar{f} ◦ \bar{g})                        & =
-    =  & <(f ◦ g)|α^{-1}(a), (f ◦ g)|α^{-1}(b)> & =
-    =  & <(f|β^{-1}(a) ◦ g|α^{-1}(a), f|β^{-1}(b) ◦ g|α^{-1}(b)> & =
-    =  & F(\bar{f}) ◦ F(\bar{g}) & 
-    $$
+    \begin{equation}
+    \begin{array}{rcl}
+       & F(\bar{f} ◦ \bar{g})                        & = \\
+    =  & <(f ◦ g)|α^{-1}(a), (f ◦ g)|α^{-1}(b)>        & = \\
+    =  & <(f|β^{-1}(a) ◦ g|α^{-1}(a), f|β^{-1}(b) ◦ g|α^{-1}(b)> & = \\
+    =  & F(\bar{f}) ◦ F(\bar{g}) & \\ 
+    \end{array}
+    \end{equation}
 
     It's not an isomorphism, as:
 
@@ -67,7 +71,7 @@
     Now:
 
     \begin{equation}
-    \begin{array}
+    \begin{array}{rll}
       F : & Sets/1           & → Sets                   \\
           & α : (A → 1)      & → α^{-1}(a)   = A         \\
           & \bar{f} : α → β  & → f|α^{-1}(a) = f|A  = f  \\
@@ -84,12 +88,12 @@
         
   \begin{tikzpicture}
       
-      \node (A) {$A$}
-      \node (B) [right of=A] {$B$}
-      \node (1) [below of=B] {$\text{\bf 1}$}
-      \draw[->] (A) to node {$f$} (B)
-      \draw[->] (A) to node {$α$} (1)
-      \draw[->] (B) to node {$β$} (1)
+      \node (A) {$A$};
+      \node (B) [right of=A] {$B$};
+      \node (1) [below of=B] {$\text{\bf 1}$};
+      \draw[->] (A) to node {$f$} (B);
+      \draw[->] (A) to node {$α$} (1);
+      \draw[->] (B) to node {$β$} (1);
 
   \end{tikzpicture}
 
@@ -101,7 +105,7 @@
     Therefore, the functor G is well defined:
 
     \begin{equation}
-    \begin{array}
+    \begin{array}{rll}
       G : & Sets             & → Sets/1         \\
           & A                & α : A ↦ 1  \\
           & f : A → B        & \bar{f} : α → β  \\
@@ -121,11 +125,11 @@
     The book defines graphs as multigraphs (parallel edges are allowed). The 
 
     \begin{equation}
-    \begin{array}
+    \begin{array}{rll}
     U : & Cat         & → Graph            \\
         & (O, A)      & ↦ (O, A, dom, cod) \\
         & F : C₁ → C₂ & ↦
-            \begin{array}
+            \begin{array}{rll}
               μ : & U(C₁)       & → U(C₂)                 \\
                   &  V          & ↦ F(V)                  \\
                   & a           & ↦ F(a) \\ 
@@ -138,7 +142,7 @@
       \item[Existence]
 
         \begin{equation}
-          \begin{array}
+          \begin{array}{rll}
             \bar{h} : & C(G)    & → D                                     \\
                       & \bar{h}(v)                & ↦  f(v)               \\                
                       & \bar{h}(id_V)             & ↦  id_{f(v)}            \\                
@@ -146,22 +150,24 @@
           \end{array}
         \end{equation}
 
-        \bar{h} satisfies $U(\bar{h}) ◦ i = f$ by construction. 
+        $\bar{h}$ satisfies $U(\bar{h}) ◦ i = f$ by construction. 
 
       \item[Uniqueness]
 
         
-        Assume $λ$ such that $U(λ) \comp i = f$, $λ  : C(G) → D$ a functor.
+        Assume $λ$ such that $U(λ) ◦ i = f$, $λ  : C(G) → D$ a functor.
 
         Then:
         For every vertex v is a vertex, then:
 
         \begin{equation}
-               λ(v) =
-             = U(λ)(v) =    % definition of U
-             = U(λ)(i(v)) = % definition of i
-             = f(v) =       % hypothesis
-             = \bar{h}(v)   % definition of \bar{h}
+          \begin{array}{rcl}
+               & λ(v)       & = \\
+             = & U(λ)(v)    & = \\   % definition of U
+             = & U(λ)(i(v)) & = \\ % definition of i
+             = & f(v)       & = \\  % hypothesis
+             = & \bar{h}(v) &   \\  % definition of \bar{h}
+          \end{array}
         \end{equation}
                
         $λ(id_V) = id_{λ(v)} = id_{f(v)} = \bar{h}(id_V)$
@@ -169,12 +175,15 @@
         λ is a functor, so:
 
         \begin{equation}
-             λ(e_1 \comp … \comp e_n)           =
-           = λ(e_1) \comp … \comp λ(e_n)        =   % λ is a functor
-           = U(λ)(e_1) \comp … \comp U(λ)(e_n)  =   % definition of U
-           = f(e_1) \comp … \comp f(e_n)        =   % hypothesis
-           = \bar{h}(e_1 \comp … \comp e_n)
+          \begin{array}{rcl}
+             & λ(e_1 ◦ … ◦ e_n)          & = \\
+           = & λ(e_1) ◦ … ◦ λ(e_n)       & = \\  % λ is a functor
+           = & U(λ)(e_1) ◦ … ◦ U(λ)(e_n) & = \\  % definition of U
+           = & f(e_1) ◦ … ◦ f(e_n)       & = \\  % hypothesis
+           = & \bar{h}(e_1 ◦ … ◦ e_n)    &   \\
+          \end{array}
         \end{equation}
+    \end{description}
 
 \end{enumerate}
 
