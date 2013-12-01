@@ -3,7 +3,7 @@ cat13
 
 Chalmers Category Theory Course
 
-Autum 2013
+Autumn 2013
 
 Branches
 --------
