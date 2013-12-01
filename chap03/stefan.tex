@@ -1,0 +1,29 @@
+%use lualatex/xelatex to compile this
+\documentclass{scrartcl}
+\input{../StefanMacros.tex}
+\usepackage{newunicodechar}
+\newunicodechar{Ø}{\emptyset}
+
+\begin{document}
+    \section*{Exercise 7}
+    
+    Let $P_1$ and $P_2$ be projectives, $e : E → X$ any epimorphism and $f : P_1 + P_2 → X$. We need to show that $f$ factorises through $e$.
+    
+    We start with the solid lines in the following diagram.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{stefan_fig.pdf}
+    \end{figure}
+    
+    Because $P_1$ is a projection, the function $f \circ i_1$ factorises over $E$ (call the function $\bar{f}_1$). The same holds for $P_2$. Now we can use the universal property of the coproduct and construct $\bar{f}$ such that $\bar{f} \circ i_1 = \bar{f_1}$ and $\bar{f} \circ i_2 = \bar{f_2}$
+    
+    Now all paths starting from $P_1$ and $P_2$ commute. Using the universal property of the coproduct again, we see that $e \circ \bar{f}$ and $f$ both go from $P_1 + P_2$ to $X$ and must therefore be the same (unique) morphism that makes the diagram comute and we are done since we have found $e \circ \bar{f} = f$.
+    
+    \section*{Exercise 15}
+    
+    Let $f, g: X → Y$ be two morphisms in {\bf Top}. I claim the coequaliser of $f$ and $g$ is the projection $π$ to $Y/{\sim}$ where $\sim$ is the smallest equivalence relation containing $\setgen{(f(x), g(x))}{x ∈ X}$.
+    
+    This means, that $Y/{\sim}$ is the space of equivalence classes of $\sim$ and the open sets are exactly those sets $S$ such that $π^{-1}(S)$ is open in $Y$, where $π$ denotes the projection $x \mapsto [x]_{\sim}$. It is simple to check that this indeed constitutes a valid topology.
+    
+    Now for the universal property: Assume there is a morphism $c : Y → Z$ such that $c \circ f = c \circ g$. This means that $c$ respects $\sim$, namely $y_1 \sim y_2 ⇒ c(y_1) = c(y_2)$. Therefore $c^{*} : Y/{\sim} → Z$ given by $[x]_\sim \mapsto c(x)$ is a well-defined function such that $c^{*} \circ π = c$. It is also continuous since, if $O ⊂ Z$ is open, then so is $c^{*-1}(O) ⊂ Y$ because this just means that $π^{-1}(c^{*-1}(O)) = c^{-1}(O)$ must be open which is true because $c$ is continuous. It is obvious, that we could not have defined $c^{*}$ differently, so the factorisation over $Y/{\sim}$ is unique as we want it to be.
+\end{document}
