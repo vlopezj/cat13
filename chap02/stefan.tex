@@ -1,0 +1,24 @@
+%use lualatex/xelatex to compile this
+\documentclass{scrartcl}
+\input{../StefanMacros.tex}
+\usepackage{newunicodechar}
+\newunicodechar{Ø}{\emptyset}
+
+\begin{document}
+    \section*{Exercise 3}
+    
+    This is simple.
+    
+    \begin{align*}
+        &\phantom{⇒}f \circ g = f \circ g'\\
+        &                  ⇒ g \circ f \circ g = g \circ f \circ g'\\
+        &                  ⇒ g \circ 1_B = 1_A \circ g'\\
+        &                  ⇒ g = g'
+    \end{align*}
+    
+    \section*{Exercise 9}
+    
+    First, let $e : A → B$ be an epimorphism in {\bf Pos} and $b ∈ B$. Let $B' = B ∪ \set{b'}$ be the poset that is identical to $B$, except that $b$ is duplicated: We have a $b'$ behaving idential to $b$ in all respects, but $b' ≠ b$. Let $f$ be the inclusion from $B$ into $B'$ and $f'$ identical to $f$ except that it maps $b$ to $b'$ instead of $b$. Both are monotonic functions and therefore morphisms in {\bf Pos}. Since $f ≠ f'$ we have, since $e$ was epi that $f \circ e ≠ f' \circ e$. This, however means that $b ∈ e(A)$ because this is the only element where $f$ and $f'$ differ. Since $b$ was chosen arbitrarily we have proven that $e$ is a surjection.\\
+    
+    Conversly, if $e : A → B$ is a surjective morphism then it is epi since this is already true in {\bf Sets} and the forgetful functor is injective.
+\end{document}

@@ -1,0 +1,39 @@
+%use lualatex/xelatex to compile this
+\documentclass{scrartcl}
+\input{../StefanMacros.tex}
+\usepackage{newunicodechar}
+\newunicodechar{Ø}{\emptyset}
+
+\begin{document}
+    \section*{Exercise 2}
+    
+    \def\Rel{\text{\bf Rel}}
+    \def\Sets{\text{\bf Sets}}
+    \begin{enumerate}[(a)]
+        \item $\Rel$ is isomorphic to $\Rel^{op}$ by the ``trivial'' isomorphism $F$:
+        \[ F(S) = S, \quad\quad F(R) = \setgen{(b,a)}{(a,b) ∈ R} \]
+        
+        It is easy to check that this maps identity morphisms to identity morphisms and if $R_1 ⊂ A × B$ and $R_2 ⊂ B × C$ are relations then:
+        
+        \begin{align*}
+                F(R_2 \circ R_1) &= \setgen{(c,a)}{(a,c) ∈ R_2 \circ R_1}\\&= \setgen{(c,a)}{∃b: (a,b) ∈ R_1 ∧ (b,c) ∈ R_2} \\&= \setgen{(c,a)}{∃b: (b,a) ∈ F(R_1) ∧ (c,b) ∈ F(R_2)} \\&= F(R_1) \circ F(R_2) \\&= F(R_2) \circ^{op} F(R_1)
+        \end{align*}
+        
+        It is easy to see that $F$ is self inverse (and the inverse is also a Funktor).
+        
+        \item $\Sets$ is not isomorphic to $\Sets^{op}$. Assume otherwise, then there are Funktors $F : \Sets → \Sets^{op}$ and $F' : \Sets^{op} → \Sets$ that are inverse to one another.
+        In particular $F'(F(Ø)) = Ø$. Assume there is a morphism $f : X → F(Ø)$ in $\Sets^{op}$. Then $F'(f) : F'(X) → Ø$ and we see $F'(X) = Ø$ by the properties of the empty set. Since $F'$ must be monic (``injective'') we conclude $X = F(Ø)$. In otherwords, there must be a magical object $X$ in $\Sets^{op}$ whose only incoming morphisms come from itself. This corresponds to a set whose only outgoing morphisms are to itself. This does not exist.
+        \item They cannot be isomorphic since this would correspond to a bijection between a set and its powerset which never exists (well known theorem by Canthor).
+    \end{enumerate}
+    
+    \section*{Exercise 3}
+    
+    \begin{enumerate}[(a)]
+        \item Let $f : A → B$ be an isomorphism in $\Sets$, meaning there is $f^{-1} : B → A$ such that $f' \circ f = id_A$ and $f \circ f' = id_B$. The former tells us that $f$ is injective, the latter tells us that $f$ is surjective. Therefore it is a bijection.\\
+        On the other hand, if $f$ is a bijection, then we immediately know that such an $f^{-1}$ exists.
+        
+        \item Let $f: M_1 → M_2$ be an isomorphism. Since the forgetful functor is a functor, the morphism $f$ is also an isomorphism on the underlying set and therefore a bijection. By definition it is a homomorphism.\\
+        Conversely, if $f : M_1 → M_2$ is a homomorphism and bjective, then the inverse function $f^{-1}$ is also a monoid homomorphism since it maps the unit element to the unit element (which is unique) and we have:
+        \[ f^{-1}(a \cdot b) = f^{-1}(f(f^{-1}(a)) \cdot f(f^{-1}(b))) = f^{-1}(f(f^{-1}(a) \cdot f^{-1}(b))) = f^{-1}(a) \cdot f^{-1}(b) \]
+    \end{enumerate}
+\end{document}
