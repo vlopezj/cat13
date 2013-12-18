@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\author{Evgeny Kotelnikov}
+\title{Exercises for Chapter 1}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+  \item[1.]
+    In order to show that $\mathbf{Rel}$ is a category we need to prove associativity and unit laws.
+
+    \newtheorem*{assoc}{Associativity law}
+    \begin{assoc}
+      $$h \circ (g \circ f) = (h \circ g) \circ f$$ for all $f \subseteq A \times B$, $g \subseteq B \times C$ and $h \subseteq C \times D$.
+    \end{assoc}
+
+    \begin{proof}
+      \begin{equation*}
+        \begin{array}{rl}
+          h \circ (g \circ f) & = \{\langle a, d\rangle \in A \times D~|~\exists\, c~(\langle a, c \rangle \in g \circ f~\&~\langle c, d \rangle \in h) \} \\
+                              & = \{\langle a, d\rangle \in A \times D~|~\exists\, c, b~(\langle a, b \rangle \in f~\&~\langle b, c \rangle \in g~\&~\langle c, d \rangle \in h) \} \\
+                              & = \{\langle a, d\rangle \in A \times D~|~\exists\, b~(\langle a, b \rangle \in f~\&~\langle b, d \rangle \in h \circ g) \} \\
+                              & = (h \circ g) \circ f.
+        \end{array}
+      \end{equation*}
+    \end{proof}
+
+    \newtheorem*{unit}{Unit law}
+    \begin{unit}
+      $$f \circ 1_A = f = 1_B \circ f$$ for all $f \subseteq A \times B$.
+    \end{unit}
+
+    \begin{proof}
+      \begin{equation*}
+        \begin{array}{rl}
+          f \circ 1_A & = \{\langle a, b \rangle \in A \times B~|~\exists\, x~(\langle a, x \rangle \in 1_A~\&~\langle x, b \rangle \in f)\} \\
+                      & = [\langle a, x \rangle \in 1_A \Rightarrow x = a] \\
+                      & = \{\langle a, b \rangle \in f\} \\
+                      & = f.
+        \end{array}
+      \end{equation*}
+      \begin{equation*}
+        \begin{array}{rl}
+          1_B \circ f & = \{\langle a, b \rangle \in A \times B~|~\exists\, x~(\langle a, x \rangle \in f~\&~\langle x, b \rangle \in 1_B)\} \\
+                      & = [\langle x, b \rangle \in 1_B \Rightarrow x = b] \\
+                      & = \{\langle a, b \rangle \in f\} \\
+                      & = f.
+        \end{array}
+      \end{equation*}
+    \end{proof}
+
+  \item[8.]
+    TODO.%Preorders form a category $\mathbf{Proset}$, such that for any pair ob objects $x$ and $y$ there exists at most one arrow between them.
+
+\end{enumerate}
+
+\end{document}
