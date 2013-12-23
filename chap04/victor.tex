@@ -1,0 +1,129 @@
+% For plaintext use only
+\documentclass{article}
+
+\usepackage{xltxtra}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\setmathfont{xits-math.otf}
+
+\tikzset{node distance=2cm, auto}
+
+\author{Víctor López Juan}
+\title{Chapter 4}
+
+\begin{document}
+
+\begin{enumerate}
+  \item[4.]
+    % Every monoid in the category of groups is an internal group.
+
+    % Internal group:
+
+    % In the same way that groups in the category of groups are abelian
+    % internal groups, we will have that monoids in the category of groups
+    % are internal groups (not necesarily abelian).
+
+    \begin{tikzpicture}
+      \node $G \cross G$ GG
+      \node $G$          G \rightof GG
+      \node $1$          T \rightof G
+      \arrow GG -> G \label \star
+      \arrow 1  -> G \label u
+    \end{tikzpicture}
+
+    Observe that $u$ is the inclusion of the trivial group in $G$.
+
+    Now:
+
+    \begin{itemize}
+      \item The underlying set of the monoid is $G$. The operation is $m$.
+      \item $m$ is associative, because $m$ is part of a monoid in the
+        category.
+
+      \item $m$ respects identity, again because it's a monoid.
+
+      \item $m$ is a group homomorphism.
+
+        
+
+  \item[8.]
+
+    \begin{itemize}
+      \item It is a congruence:
+
+        % f ~ g implies dom,cod(f) = dom,cod(g) %
+        % f ~ g implies bfa ~ bga
+
+        \item By definition, the domain and the codomain match.
+        \item
+          Let f, g such that $f ~ g$.
+          
+
+          \begin{itemize}
+            \item $~$ is an equivalence relation. This is derived from the
+              fact that equality is an equivalence relation, and the double
+              implication.
+
+            \item $dom,cod(bfa) = \lbracket dom(a), cod(b) \rbracket = dom,cod(bga)$$
+            \item
+              
+              Let $H : D → E$ such that $HF = HG$. Then $H(f) = H(g)$
+
+              H(bfa) = H(b)H(f)H(a) = H(b)H(g)H(a) = H(bga)
+              
+          \end{itemize}
+
+        \item
+
+          % D/~ is the coequalizer of F and G
+
+          \begin{tikzpicture}
+            \node $C$ C
+            \node $D$ D
+            \node $\nicefrac{D}{\tilde}$  DQ
+
+            \arrow C -> D $F$
+            \arrow C -> D $G$
+            \arrow D -> DQ $P$
+            
+          \end{tikzpicture}
+
+          \begin{itemize}
+            \item % PF = PG
+
+              P(F(C)) = P(G(C)), because F(C) = G(C)
+
+
+              \begin{itemize}
+                dom,cod(Fα) = dom,cod(Gα)
+
+                If HF = HG, then H(Fα) = H(Gα).
+
+              \end{itemize}
+          
+              Therefore: F(α) ~ G(α)
+
+              Therefore: PF(α) = PG(α)
+
+              Now, if there is a functor $Z : D -> X$, then there is
+              a unique functor $\bar{Z} : \nicefrac{D}{~} → X$, such that
+
+              $\bar{Z} \comp P = Z$. 
+
+              $\bar{Z} = Z \comp I$, where $I$ is a mapping that chooses
+              a representative from the equivalence class.
+
+              % TODO: Well defined
+              % TODO: Unique
+                If it's equal over classes, then it's unique by definition.
+          
+               
+          
+          
+    
+\end{enumerate}
+
+\end{document}
+  
