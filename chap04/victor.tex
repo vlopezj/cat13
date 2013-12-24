@@ -46,6 +46,12 @@
 
       \item $m$ is a group homomorphism.
 
+        $m(g₁·h₁, g₂·h₂) = m((g₁,g₂)·(h₁,h₂)) = m(g₁,g₂)·m(h₁,h₂)$
+                                              
+
+        Therefore, the operation $m$ is the same as the original operation
+        in the group, and is therefore, an inverse. Also, only commutative
+        groups can form a monoid in Group.
         
 
   \item[8.]
@@ -107,22 +113,41 @@
 
               Therefore: PF(α) = PG(α)
 
-              Now, if there is a functor $Z : D -> X$, then there is
-              a unique functor $\bar{Z} : \nicefrac{D}{~} → X$, such that
+              Now, if there is a functor $Z : D -> X$, such that
+              $ZF = ZG$, then there is a unique functor $\bar{Z} :
+              \nicefrac{D}{~} → X$, such that
 
               $\bar{Z} \comp P = Z$. 
 
-              $\bar{Z} = Z \comp I$, where $I$ is a mapping that chooses
-              a representative from the equivalence class.
+              $\bar{Z} = Z \comp I$, where $I$ is a choice function
+              from $\nicefrac{D}{~}$ to the original set.
 
-              % TODO: Well defined
-              % TODO: Unique
-                If it's equal over classes, then it's unique by definition.
+              \begin{itemize}
+                \item
+                    For every $x$, let $\bar{x} = I(P(x))$
+                    
+                    \begin{equation}
+                    \bar{Z} P(x) = Z (I P(x)) =          % projection
+                                    
+                                 = Z (I P(\bar{x}) )) =  % x ~ \bar{x}
+
+                                 = Z (\bar{x})           % \bar{x} is the representative
+
+                                 = Z (x)                 % x ~ \bar{x}
+                    \end{equation}  
+                    
+                \item
+                    Uniqueness:
+                    
+                    Let $\bar{Z}^\prime : \nicefrac{D}{~} → X$ such
+                    that $\bar{Z}^\prime \comp P = Z$.
+
+                    
+                    Then $\bar{Z}^\prime(x) = \bar{Z}^\prime(P(I(x))) =
+                                          = Z(I(x)) = \bar{Z}(x)$.
+             \end{itemize}
+        \end{itemize}
           
-               
-          
-          
-    
 \end{enumerate}
 
 \end{document}
