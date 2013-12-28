@@ -1,0 +1,259 @@
+\documentclass{article}
+
+\usepackage{xltxtra}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\setmathfont{xits-math.otf}
+
+\tikzset{node distance=2cm, auto}
+
+\author{Víctor López Juan}
+\title{Chapter 5}
+
+\begin{document}
+
+\begin{enumerate}
+
+  \item[8.]
+
+    \begin{itemize}
+      \item Composition is well-well defined.
+        
+
+      \begin{itemize}
+        \item The arrow $\vert f \vert^\star (U_g) \rightarrowtail U_f$
+          is monic, because the diagram is a pullback.
+
+        \item $\vert f \vert ^\star (U_g)$ is a subobject of A.
+
+      \end{itemize}
+
+
+      \item There must be identity arrows for every object.
+
+        \begin{itemize}
+          \item For every object, there is an identity arrow.
+
+            \begin{tikzpicture}
+              \node (A) {$A$};
+              \node (A2) [right of=A] {$A$};
+              \node (A3) [below of=A] {$A$};
+    
+              \draw [->] (A) to node {$id_A$} (A2);
+              \draw [>->] (A) to node {$id_A$} (A3);
+            \end{tikzpicture}
+    
+
+            \begin{tikzpicture}
+              
+            \end{tikzpicture}
+            
+            Pullbacks are unique. Therefore, any object which makes
+            the diagram commute and is universal with this property
+            is the pullback.
+            
+            \begin{tikzpicture}
+              \node (A) {$A$};
+              \node (A2) [right of=A] {$A$};
+              \node (A3) [below of=A] {$A$};
+
+              \node (Uf) [above of=A2] {$U_f$};
+              \node (Uf2) [above of=A] {$U_f$};
+              \node (B)  [right of=Uf] {$B$};
+              
+    
+              \draw [->] (A) to node {$id_A$} (A2);
+              \draw [>->] (A) to node {$id_A$} (A3);
+              \draw [>->] (Uf) to node {$m$} (A2);
+              \draw [>->] (Uf2) to node {$m$} (A);
+              \draw [->] (Uf) to node {$\vert f \vert$} (B);
+              \draw [->] (Uf2) to node {$id_{U_f}$} (Uf);
+            \end{tikzpicture}
+
+
+            \begin{tikzpicture}
+
+              \node (Uf) {$U_f$};
+              \node (A)  [below of=Uf] {$A$};
+              \node (Uf2) [above of=Uf] {$U_f$};
+              
+              \node (B)  [right of=Uf] {$B$};
+              \node (B2) [above of=B] {$B$};
+              \node (B3) [right of=B2] {$B$};
+
+    
+              \draw [->] (B2) to node {$id_B$} (B3);
+              \draw [>->] (B2) to node {$id_B$} (B);
+              \draw [>->] (Uf) to node {$m$} (A);
+              \draw [->] (Uf) to node {$\vert f \vert$} (B);
+              \draw [->] (Uf2) to node {$\vert f \vert$} (B2);
+              \draw [>->] (Uf2) to node {$id_{U_f}$} (Uf);
+            \end{tikzpicture}
+            % TODO: Check it is a pullback
+            Easy to check that $U_f$ is a pullback of both diagrams.
+
+            Therefore, identity arrows are both the right and left
+            identity for composition
+
+        \item Composition is associative.
+
+           \begin{tikzpicture}
+
+             \node (A) {$A$};
+             \node (Uf) [above of=A] {$U_f$};
+
+             \node (B) [right of=Uf] {$B$};
+             \node (Ug) [above of=B] {$U_g$};
+
+             \node (C) [right of=Ug] {$C$};
+             \node (Uh) [above of=C] {$U_h$};
+
+             \node (D) [right of=Uh] {$D$};
+
+             \draw [>->] (Uf) to node {$m_1$} (A);
+             \draw [>->] (Ug) to node {$m_2$} (B);
+             \draw [>->] (Uh) to node {$m_3$} (C);
+
+             \draw [->]  (Uf) to node {$\vert f \vert$} (B);
+             \draw [->]  (Ug) to node {$\vert g \vert$} (C);
+             \draw [->]  (Uh) to node {$\vert h \vert$} (D);
+          \end{tikzpicture}
+           
+          \begin{tikzpicture}
+
+             \node (A) {$A$};
+             \node (Uf) [above of=A] {$U_f$};
+
+             \node (B) [right of=Uf] {$B$};
+             \node (Ug) [above of=B] {$U_g$};
+             \node (Ug2) [above of=Uf] {$U_{f \circ g}$};
+
+             \node (C) [right of=Ug] {$C$};
+             \node (Uh) [above of=C] {$U_h$};
+             
+             \node (Uh2) [above of=Ug2] {$\vert f \circ g \vert U_h$};
+
+             \node (D) [right of=Uh] {$D$};
+
+             \draw [>->] (Uf) to node {$m_1$} (A);
+             \draw [>->] (Ug) to node {$m_2$} (B);
+             \draw [>->] (Ug2) to node {$m_2^\prime$} (Uf);
+             \draw [>->] (Uh) to node {$m_3$} (C);
+
+             \draw [->]  (Ug2) to node {$\bar{\vert f \vert}$} (Ug);
+             
+             \draw [->]  (Uf) to node {$\vert f \vert$} (B);
+             \draw [->]  (Ug) to node {$\vert g \vert$} (C);
+             \draw [->]  (Uh) to node {$\vert h \vert$} (D);
+
+             \draw [>->] (Uh2) to node {$m_3^\prime$} (Ug2);
+             \draw [->] (Uh2) to node {} (Uh);
+          \end{tikzpicture}
+          
+           \begin{tikzpicture}
+
+             \node (A) {$A$};
+             \node (Uf) [above of=A] {$U_f$};
+
+             \node (B) [right of=Uf] {$B$};
+             \node (Ug) [above of=B] {$U_g$};
+
+             \node (C) [right of=Ug] {$C$};
+             \node (Uh) [above of=C] {$U_h$};
+
+             \node (Uh2) [above of=Ug] {$U_{g \circ h}$};
+             
+             \node (Ug2) [left of=Uh2] {$\vert f \vert^\star U_{g \circ h}$};
+
+             \node (D) [right of=Uh] {$D$};
+
+             \draw [>->] (Uf) to node {$m_1$} (A);
+             \draw [>->] (Ug) to node {$m_2$} (B);
+             \draw [>->] (Uh) to node {$m_3$} (C);
+
+             \draw [>->] (Uh2) to node {$m_3^\prime$} (Ug);
+             
+             \draw [>->] (Ug2) to node {} (Uf);
+             
+             \draw [->]  (Uf) to node {$\vert f \vert$} (B);
+             \draw [->]  (Ug) to node {$\vert g \vert$} (C);
+             \draw [->]  (Uh) to node {$\vert h \vert$} (D);
+
+             \draw [->]  (Uh2) to node {$\bar{\vert g \vert}$} (Uh);
+
+
+             \draw [->]  (Ug2) to node {} (Uh2);
+             
+          \end{tikzpicture}
+           
+           \begin{tikzpicture}
+
+             \node (A) {$A$};
+             \node (Uf) [above of=A] {$U_f$};
+
+             \node (B) [right of=Uf] {$B$};
+             \node (Ug) [above of=B] {$U_g$};
+
+             \node (C) [right of=Ug] {$C$};
+             \node (Uh) [above of=C] {$U_h$};
+
+             \node (Ugh) [above of=Ug] {$U_{g \circ h}$};
+             \node (Ufg) [above of=Uf] {$U_{f \circ g}$};
+             
+             \node (Ufgh) [above of=Ufg] {$U_{f \circ g \circ h}$};
+
+
+             \draw [->]  (Ufg) to node {$\bar{\vert f \vert}$} (Ug);
+             \draw [->]  (Ugh) to node {$\bar{\vert g \vert}$} (Uh);
+             \draw [->]  (Ufgh) to node {} (Ugh);
+
+             \node (D) [right of=Uh] {$D$};
+
+             \draw [>->] (Uf) to node {$m_1$} (A);
+             \draw [>->] (Ug) to node {$m_2$} (B);
+             \draw [>->] (Uh) to node {$m_3$} (C);
+
+             \draw [>->] (Ufg) to node {} (Uf);
+             \draw [>->] (Ugh) to node {} (Ug);
+             \draw [>->] (Ufgh) to node {} (Ufg);
+
+             \draw [->]  (Uf) to node {$\vert f \vert$} (B);
+             \draw [->]  (Ug) to node {$\vert g \vert$} (C);
+             \draw [->]  (Uh) to node {$\vert h \vert$} (D);
+          \end{tikzpicture}
+
+
+          By the two pullback lemma, $U_{f \circ g \circ h}$ is both a pullback
+          of, and, :
+
+          % TODO: Explain
+
+          Pullbacks are unique up to isomorphism. Therefore:
+
+          $$ \vert f \vert^\star U_{g\circ h} = U_{f \circ g \circ h} = \vert f \circ g \vert^\star (U_h)$$
+
+        \end{itemize}
+        
+   \end{itemize}
+
+   \item[13.]
+
+     \begin{enumerate}
+
+       \item[a.]
+     All constructions preserve being abelian, because, in all of them,
+     the product is defined with regards to the underlying monoids,
+     which are all abelian groups.
+
+     \item[b.]
+
+       Only constructions based on the product preserve the order
+       requirement. Those which are based on co-products don't.
+
+    \end{enumerate}
+
+\end{enumerate}
+\end{document}
+  
