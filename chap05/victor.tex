@@ -240,17 +240,81 @@
 
    \item[13.]
 
+     First, let's define the limits in terms of products and equalizers
+     in Set.
+
+     \begin{itemize}
+       \item
+         
+         $$M = \lim_{\righttarrow} M_i = \nicefrac{\coprod M_i}{~}$$
+
+         Where $~$ is defined as the relation that makes each of the
+         following diagrams comute:
+
+         $$ in_i = in_{i+1} \comp g_i$$
+
+         %% TODO
+
+       \item
+         
+         
+         $$M = \lim_{\lefttarrow} M_i = {\prod M_i} \vert_P$$
+
+         Where $P$ is the conjuction of the following:
+
+         $P(m) \equiv \bigwedge_i \pi_{i+1}(m) = \pi_{i}( g_{i}(m) )$
+
+         If $\pi_1(m)$ is fixed, then the values of $\pi_{i+1}(m)$ are
+         all determined by $P$. Essentially, $M = M_o$.
+
+       \item
+
+         $$N = \lim_{\righttarrow} N_i = \nicefrac{\coprod N_i}{~}$$
+
+         $$ in_{i+1} = in_{i} \comp g_i$$
+         
+         Every element $n \in N_i$ is a member of the equivalence
+         class of $g_{i,0}(n) \in N_0$, and each of those elements
+         has its own equivalence class in the quotient.
+         Therefore, $N = N_0$.
+
+       \item  
+
+         $$M = \lim_{\lefttarrow} M_i = {\prod M_i} \vert_P$$
+         
+         $P(m) \equiv \bigwedge_i \pi_{i}(m) = g_{i}(\pi_{i+1}(m) )$
+
+         $M$ is defined as an equalizer.
+
      \begin{enumerate}
 
        \item[a.]
+
+         Cases 2 and 3 are trivial.
+
+         In cases 1 and 4, the group operation is defined pointwise,
+         so commutativity and inverse is inherited.
+         
      All constructions preserve being abelian, because, in all of them,
      the product is defined with regards to the underlying monoids,
      which are all abelian groups.
 
      \item[b.]
 
-       Only constructions based on the product preserve the order
-       requirement. Those which are based on co-products don't.
+         Cases 2 and 3 are trivial, because they are finite groups.
+
+         In case 1, all elements of $M$ are also elements of one of the
+         $M_i$, which is finite. Therefore, they all have finite order.
+
+         In case 4, this is, generally, not the case.
+
+         Take the sequence $M_i = (\mathbb{Z}_{2^i},+)$.
+
+         The infinite tuple $(1, …, 1) \in M$. However, for every $k$,
+         $k·(1, …, 1) \neq 0$.
+         
+         
+     \end{enumerate}
 
     \end{enumerate}
 
