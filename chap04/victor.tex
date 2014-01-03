@@ -3,9 +3,11 @@
 
 \usepackage{xltxtra}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{tikz}
 \usepackage{unicode-math}
 \usepackage{fontspec}
+\usepackage{faktor}
 \setmathfont{xits-math.otf}
 
 \tikzset{node distance=2cm, auto}
@@ -23,14 +25,15 @@
 
     % In the same way that groups in the category of groups are abelian
     % internal groups, we will have that monoids in the category of groups
-    % are internal groups (not necesarily abelian).
+    % are internal groups.
 
     \begin{tikzpicture}
-      \node $G \cross G$ GG
-      \node $G$          G \rightof GG
-      \node $1$          T \rightof G
-      \arrow GG -> G \label \star
-      \arrow 1  -> G \label u
+      \node  (GG)  {$G \times G$};
+      \node  (G) [right of=GG] {$G$};
+      \node  (T) [right of=G] {$1$};
+      
+      \draw[->] (GG) to node {$\star$} (G);
+      \draw[->] (T) to node {$u$} (G);
     \end{tikzpicture}
 
     Observe that $u$ is the inclusion of the trivial group in $G$.
@@ -52,6 +55,7 @@
         Therefore, the operation $m$ is the same as the original operation
         in the group, and is therefore, an inverse. Also, only commutative
         groups can form a monoid in Group.
+    \end{itemize}
         
 
   \item[8.]
@@ -72,7 +76,8 @@
               fact that equality is an equivalence relation, and the double
               implication.
 
-            \item $dom,cod(bfa) = \lbracket dom(a), cod(b) \rbracket = dom,cod(bga)$$
+               $$dom,cod(bfa) = \langle dom(a), cod(b) \rangle = dom,cod(bga)$$
+
             \item
               
               Let $H : D → E$ such that $HF = HG$. Then $H(f) = H(g)$
@@ -86,14 +91,13 @@
           % D/~ is the coequalizer of F and G
 
           \begin{tikzpicture}
-            \node $C$ C
-            \node $D$ D
-            \node $\nicefrac{D}{\tilde}$  DQ
+            \node (C) {$C$};
+            \node (D) [right of=C] {$D$};
+            \node (DQ) [right of=D] {$\faktor{D}{\sim}$};
 
-            \arrow C -> D $F$
-            \arrow C -> D $G$
-            \arrow D -> DQ $P$
-            
+            \draw[->] (C) to node {$F$} (D);
+            \draw[->] (C) to node {$G$} (D);
+            \draw[->] (D) to node {$P$} (DQ);
           \end{tikzpicture}
 
           \begin{itemize}
@@ -102,52 +106,45 @@
               P(F(C)) = P(G(C)), because F(C) = G(C)
 
 
-              \begin{itemize}
                 dom,cod(Fα) = dom,cod(Gα)
 
                 If HF = HG, then H(Fα) = H(Gα).
 
-              \end{itemize}
-          
               Therefore: F(α) ~ G(α)
 
               Therefore: PF(α) = PG(α)
 
               Now, if there is a functor $Z : D -> X$, such that
-              $ZF = ZG$, then there is a unique functor $\bar{Z} :
-              \nicefrac{D}{~} → X$, such that
+              $ZF = ZG$, then there is a unique functor $\bar{Z} : \faktor{D}{\sim} → X$, such that
 
-              $\bar{Z} \comp P = Z$. 
+              $\bar{Z} \circ P = Z$. 
 
-              $\bar{Z} = Z \comp I$, where $I$ is a choice function
-              from $\nicefrac{D}{~}$ to the original set.
+              $\bar{Z} = Z \circ I$, where $I$ is a choice function
+              from $\faktor{D}{\sim}$ to the original set.
 
               \begin{itemize}
                 \item
                     For every $x$, let $\bar{x} = I(P(x))$
                     
-                    \begin{equation}
+                    \begin{equation*}
                     \bar{Z} P(x) = Z (I P(x)) =          % projection
-                                    
                                  = Z (I P(\bar{x}) )) =  % x ~ \bar{x}
-
                                  = Z (\bar{x})           % \bar{x} is the representative
-
                                  = Z (x)                 % x ~ \bar{x}
-                    \end{equation}  
+                    \end{equation*}  
                     
                 \item
                     Uniqueness:
                     
-                    Let $\bar{Z}^\prime : \nicefrac{D}{~} → X$ such
-                    that $\bar{Z}^\prime \comp P = Z$.
+                    Let $\bar{Z}^\prime : \faktor{D}{\sim} → X$ such
+                    that $\bar{Z}^\prime \circ P = Z$.
 
                     
                     Then $\bar{Z}^\prime(x) = \bar{Z}^\prime(P(I(x))) =
                                           = Z(I(x)) = \bar{Z}(x)$.
              \end{itemize}
         \end{itemize}
-          
+    \end{itemize}    
 \end{enumerate}
 
 \end{document}
