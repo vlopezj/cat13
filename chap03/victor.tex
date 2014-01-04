@@ -3,6 +3,8 @@
 
 \usepackage{xltxtra}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{tikz}
 \usepackage{unicode-math}
 \usepackage{fontspec}
@@ -11,65 +13,81 @@
 \tikzset{node distance=2cm, auto}
 
 \author{Víctor López Juan}
-\title{Chapter 2}
+\title{Chapter 3}
 
 \begin{document}
 
 \begin{enumerate}
   \item[9.]
-    $\bar{h} = h \comp i$ is a monoid homomorfism.
+    $\bar{h} = h \circ i$ is a monoid homomorfism.
+    
+    \begin{proof}
     \begin{itemize}
-      \item
-        $ \bar{h}(1_M) = h(i(1_M)) = h(\rbracket 1_M \lbracket)$
-        % empty product is unit
-        $= h(μ(\lbracket \lbracket \rbracket \rbracket)) = $
-        $= h(ε(\lbracket \lbracket \rbracket \rbracket)) = $
-        $= h(\lbracket \rbracket) = $
-        % h is homomorfism
-        $= 1_N $
+      Monoid homomorphisms must map identity elements to each other,
+      and preserve the operation.
+      
       \item
 
-        h is a monoid homomorfism
+        $\bar{h}$ respects the unit element.
+        
+        \begin{align*}
+          & \bar{h}(1_M)  \\
+        = & h(i(1_M)) \\
+        = & h(\langle 1_M \rangle)   \\
+        = & h(μ(\langle \langle \rangle \rangle))           && \text{empty product is unit} \\
+        = & h(ε(\langle \langle \rangle \rangle))   \\
+        = & h(\langle \rangle)                             \\
+        = & 1_N                                              && \text{$h$ is an homomorfism} \\
+        \end{align*}
 
-        $\bar{h}(xy) = h(i(x·y)) = h(\lbracket x·y \rbracket) =
-         h(μ(\lbracket \lbrackey x, y \rbracket \rbracket)) =
-         h(ε(\lbracket \lbrackey x, y \rbracket \rbracket)) =
-         h(\lbrackey x, y \rbracket)) =
-         h(\lbracket x \rbracket \cdot \lbracket y \rbracket) =
-         % h is homomorfism
-         h(\lbracket x \rbracket) \cdot h(\lbracket y \rbracket) =
-         % definition of iu¡
-         h(i(x)) \cdot h(i(y)) =
-         % definition of hbar
-         \bar{h}(x) \cdot \bar{h}(y) =
+      \item
 
+        $\bar{h}$ respects the monoid operation.
+
+        \begin{align*}
+           \bar{h}(xy) \\
+         = h(i(x·y)) = h(\langle x·y \rangle)  \\
+         = & h(μ(\langle \langle x, y \rangle \rangle))  \\
+         = & h(ε(\langle \langle x, y \rangle \rangle))  \\
+         = & h(\langle x, y \rangle))  \\
+         = & h(\langle x \rangle \cdot \langle y \rangle)  \\
+         = & h(\langle x \rangle) \cdot h(\langle y \rangle)  && \text{$h$ is an homomorfism} \\
+         = & h(i(x)) \cdot h(i(y))                                    && \text{definition of $i$} \\
+         = & \bar{h}(x) \cdot \bar{h}(y)                              && \text{definition of $\bar{h}$} \\
+         \end{align*}
+     \end{itemize}
+    \end{proof}
   \item[10.]
 
         Let $(e,M)$ be the coequalizer of $μ$ and $ε$, and $F$ be the
         forgetful functor $Mon → Set$.
 
-        $F(\pi)\comp F(μ) = F(\pi \comp μ) = F(\pi \comp ε) = F(\pi) \comp F(ε)$
+        $$F(\pi)\circ F(μ) = F(\pi \circ μ) = F(\pi \circ ε) = F(\pi) \circ F(ε)$$
 
         Also, it is universal with respect to this property.
 
         Let $i$ be the inclusion of generators into TM $i : M → TM$,
-        $i(x) = \lbracket x \rbracket$.
+        $i(x) = \langle x \rangle$.
         
         Let there be a set $X$, and an arrow $z : TM → X$. Then there's
-        an arrow $\bar{z} : M → X$, $\bar{z} = z \comp i$.
+        an arrow $\bar{z} : M → X$, $\bar{z} = z \circ i$.
 
-        Is this arrow unique in set?
+        Is this arrow unique in {\bf Set}?
 
-        Assume $\bar{z}^\prime$ such that $\bar{z}^\prime \comp F(\pi) = z$.
+        Assume $\bar{z}^\prime$ such that $\bar{z}^\prime \circ F(\pi) = z$.
 
         Then:
 
-        $\bar{z}^\prime(x) = \bar{z}^\prime(F(\pi)(\lbracket x \rbracket)) =$
-        $                 = z(\lbracket x \rbracket)                  =$
-        $                 = \bar{z}(F(\pi)(\lbracket x \rbracket))       =$
-        $                 = \bar{z}(x)$.
-
+        \begin{align*}
+          & \bar{z}^\prime(x) \\
+        = & \bar{z}^\prime(F(\pi)(\langle x \rangle))  \\
+        = & z(\langle x \rangle)                                  \\
+        = & \bar{z}(F(\pi)(\langle x \rangle))                         \\
+        = & \bar{z}(x) \\
+        \end{align*}
+ 
         Therefore, $\bar{z}^\prime = \bar{z}$
-
+\end{enumerate} 
 \end{document}
-  
+   
+ 
