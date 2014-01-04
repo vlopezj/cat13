@@ -1,0 +1,210 @@
+% For plaintext use only
+\documentclass{article}
+
+\usepackage{xltxtra}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{unicode-math}
+\usepackage{fontspec}
+\setmathfont{xits-math.otf}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\tikzset{node distance=2cm, auto}
+
+\author{Víctor López Juan}
+\title{Chapter 2}
+
+\begin{document}
+
+\begin{enumerate}
+  \item[12.]
+
+    A boolean algebra is a tuple $B = (\vert B \vert, ≤, ∧, ∨, ¬, BOT, TOP)$ which
+    fulfils the following conditions for every $a$, $b$, $c$ $ ∈ B$.
+    \begin{itemize}
+      \item $(B, ≤)$ is a poset.
+      \item $BOT ≤ a ≤ TOP$
+      \item $a ≤ c$ and $b ≤ c$ iff $a ∨ b ≤ c$
+      \item $c ≤ a$ and $c ≤ b$ iff $c ≤ a ∧ b$
+      \item $a ≤ ¬b$ iff $a ∧ b = BOT$
+      \item $¬¬a = a$
+    \end{itemize}
+
+    Boolean algebras together with their homomorphisms form a category.
+    The boolean algebra $\text{\bf 2}$ is the initial algebra, where
+    $\vert \text{\bf 2} \vert = \{BOT, TOP\}$.
+
+
+    For a boolean algebra $B$, a filter $F \subsetof B$ is a set such
+    that, for every $a$, $b$:
+
+    \begin{itemize}
+      \item $a \in F$ and $a ≤ b$ ⇒ $b ∈ F$
+      \item $∧(F,F) \subsetof F$
+    \end{itemize}
+
+    $B \subsetof B$ is the trivial filter. 
+    The set of non-trivial filters can be ordered by inclusion; a maximal element
+    is an ultrafilter.
+
+   \begin{enumerate}
+     \item Every homomorphism $h : B → \text{\bf 2}$ corresponds to an
+       ultrafilter in B.
+
+       Let $U = h^{-1}(TOP)$.
+
+       First, prove that $U$ is a filter.
+
+       \begin{itemize}
+         \item
+           Let $a ∈ U$. Then $h(a) = TOP$
+
+           Let $b ∈ B$ such that $a ≤ b$. $h$ is an homomorphism, which
+           preserves the ordering therefore $TOP = h(a) ≤ h(b)$.
+
+           On the other hand, $h(b) ≤ TOP$ because $\text{\bf 2}$ is a
+           boolean algebra. So, $h(b) = TOP$, and $b ∈ U$.
+
+         \item
+
+           Let $a, b ∈ u$. Then $h(a), h(b) = TOP$.
+
+           $h$ is an homomorphism; which implies $h(a ∧ b) = h(a) ∧ h(b) = TOP ∧ TOP$.
+
+           For all elements x, $x ≤ TOP$. Therefore, we have
+
+           $$TOP ≤ TOP ∧ TOP ≤ TOP$$
+
+           Finally, $h(a ∧ b) = TOP$, so $(a ∧ b) ∈ U$.
+
+      \end{itemize}
+
+      $U$ is non-trivial, as $h(BOT) = BOT ≠ TOP$.
+
+      Now, assume that $U$ is not an ultrafilter. Then, there exists
+      some filter $U^\prime$, $U^\prime \subsetneq U$, $U^\prime ≠ B$.
+           
+      Let $x ∈ U^\prime$. Then, $h(x) = BOT$, and
+      $h(¬x) = TOP$, so $¬x ∈ U \subset U^\prime$.
+
+      Because $U^\prime$ is a filter, and $x ≤ x$, $x ∧ ¬x = BOT$, and
+      $BOT ∈ U^\prime$. But, in this case, for every $x ∈ B$, $BOT ≤ x$
+      and $x ∈ U^\prime$. Therefore, $U^\prime = B$, which is a contradiction.
+
+   \item Every ultrafilter $U$ in $B$ corresponds to an homomorphism $h : B → \text{\bf 2}$.
+     
+     Let $h(x) = TOP$ iff $x ∈ U$.
+
+     
+      
+
+     %% TODO: Ultrafilter properties
+  \item[18.]
+
+    We want to represent an arbitrary monoid as a set of homomorphisms.
+    
+    Let $(\mathbb{N}, +, 0)$ be the free, commutative monoid generated
+    by one element $e$.
+
+    $$\mathbb{N} = \{ 0, e, 2·e, 3·e, …, k·e, … \}$$
+
+
+    Let $(M,·,1)$ be a monoid. For every $m \in M$, define the
+    following mapping.
+
+    \begin{align*}
+    h_m & : & \mathbb{N} & →        & M   \\
+        &   &     k·e    & \mapsto  & m^k \\
+    \end{align*}
+
+    In particular,
+
+    $$h(0) = h(0·e) = m^0 = 1$$ 
+    
+    $$h_m(k·e + j·e) = h_m((k+j)·e) = m^(k+j) = m^k · m^j = h_m(k·e) + h_m(j·e)$$
+
+    Therefore, $h_m$ is a monoid homomorphism.
+
+    Now, let $f : \mathbb{N} → M$ be an arbitrary monoid homomorphism.
+
+    This implies $f(0) = 1$ and $f(k·e) = f(e)^k$.
+
+    Therefore, $f \equiv h_{f(e)}$.
+
+    \begin{proposition}
+      For every monoid $M \in \text{\bf Mon}$:
+
+      $$Hom_{\text{\bf Mon}}(\mathbb{N}, M) \cong \vert M \vert$$
+    \end{proposition}
+
+    \begin{proof}
+
+      Define $i_1$ and $i_2$ as arrows in {\bf Set} as follows:
+      
+      \begin{align*}
+        i_1 & : & Hom_{\text{\bf Mon}}(\mathbb{N}, M) & →        & \vert M \vert \\      
+            &   & f                                \mapsto  & f(e)          \\
+      \end{align*}
+
+      \begin{align*}
+        i_2 & : & \vert M \vert & →     & Hom_{\text{\bf Mon}}(\mathbb{N}, M) \\
+            &   &      m        & \mapsto & h_m                          \\
+      \end{align*}
+
+      $$i_2(i_1(f)) = i_2(f(e)) = h_{f(e)} = f$$ 
+
+      $$i_1(i_2(m)) = i_1(h_m) = h_m(e) = m$$
+
+      $i_1$ is an isomorphism in {\bf Set} with inverse $i_2$.
+
+      Therefore, $Hom_{\text{\bf Mon}}(\mathbb{N}, M)$ and $\vert M \vert$ are
+      isomorphic.
+      
+    \end{proof}
+
+    \begin{corollary}
+      The forgetful functor $U : \text{\bf Mon} → \text{\bf Set}$
+      is representable.
+
+    \end{corollary}
+    \begin{proof}
+      
+      $$U(–) \cong Hom_{\text{\bf Mon}}(\mathbb{N}, –)$$
+    \end{proof}
+
+    \begin{corollary}
+      $U$ preserves all small products.
+    \end{corollary}
+
+    \begin{proof}
+
+      This follows directly from Proposition 2.20.
+
+      \begin{align*}
+       & U(A \times B) \\
+      =& Hom(\mathbb{N}, A \times B) \\
+      =& Hom(\mathbb{N}, A) \times Hom(\mathbb{N}, B) \\
+      =& U(A) \times U(B)
+      \end{align*}
+
+    \end{proof}
+
+      Non-small products can't be preserved because $U(A \times B)$
+      is not well defined.
+
+      
+    
+
+    
+    
+
+
+\end{enumerate}
+
+
+\end{document}
+  
