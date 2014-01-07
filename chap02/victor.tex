@@ -12,6 +12,7 @@
 
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
 
 \tikzset{node distance=2cm, auto}
 
@@ -39,17 +40,28 @@
     $\vert \text{\bf 2} \vert = \{BOT, TOP\}$.
 
 
-    For a boolean algebra $B$, a filter $F \subsetof B$ is a set such
+    For a boolean algebra $B$, a filter $F \subset B$ is a set such
     that, for every $a$, $b$:
 
     \begin{itemize}
       \item $a \in F$ and $a ≤ b$ ⇒ $b ∈ F$
-      \item $∧(F,F) \subsetof F$
+      \item $∧(F,F) \subset F$
     \end{itemize}
 
-    $B \subsetof B$ is the trivial filter. 
+    $B \subset B$ is the trivial filter. 
     The set of non-trivial filters can be ordered by inclusion; a maximal element
     is an ultrafilter.
+    
+     \begin{lemma}\label{lem:bot}
+       If $F$ is a filter, $BOT \in F$ iff $F = B$.
+     \end{lemma}
+     
+     \begin{proof}
+           If $F$ is a filter, and $BOT ∈ F$, for every $x$ in $B$, $BOT ≤ x$,
+           $x ∈ F$; which means $F = B$.
+
+           If $F = B$, then $BOT \in F$.
+     \end{proof}
 
    \begin{enumerate}
      \item Every homomorphism $h : B → \text{\bf 2}$ corresponds to an
@@ -88,21 +100,358 @@
       Now, assume that $U$ is not an ultrafilter. Then, there exists
       some filter $U^\prime$, $U^\prime \subsetneq U$, $U^\prime ≠ B$.
            
-      Let $x ∈ U^\prime$. Then, $h(x) = BOT$, and
-      $h(¬x) = TOP$, so $¬x ∈ U \subset U^\prime$.
-
-      Because $U^\prime$ is a filter, and $x ≤ x$, $x ∧ ¬x = BOT$, and
-      $BOT ∈ U^\prime$. But, in this case, for every $x ∈ B$, $BOT ≤ x$
-      and $x ∈ U^\prime$. Therefore, $U^\prime = B$, which is a contradiction.
+      Let $x ∈ U^\prime \setminus U$. Then, $h(x) = BOT$, and
+      $h(¬x) = TOP$, so $¬x ∈ U \subset U^\prime$. This contradicts
+      lemma \ref{lem:neg}.
 
    \item Every ultrafilter $U$ in $B$ corresponds to an homomorphism $h : B → \text{\bf 2}$.
-     
-     Let $h(x) = TOP$ iff $x ∈ U$.
 
      
+     \begin{lemma}\label{lem:commutative}
+       The operations $∧$, $∨$ are commutative.
+     \end{lemma}
+
+     \begin{proof}
+       Let $a$, $b$ $∈ B$.
+       
+       $$b ∧ a ≤ b ∧ a \Rightarrow b ∧ a ≤ a$$
+
+       $$b ∧ a ≤ b ∧ a \Rightarrow b ∧ a ≤ b$$
+       
+       $$b ∧ a ≤ a, b ∧ a ≤ b \Rightarrow b ∧ a ≤ a ∧ b$$
+
+       By renaming variables,  it also holds that $a ∧ b ≤ b ∧ a$.
+
+       Therefore, $a ∧ b = b ∧ a$.
+
+       On the other hand,
+
+       $$b ∨ a ≤ b ∨ a \Rightarrow a ≤ b ∨ a$$
+       
+       $$b ∨ a ≤ b ∨ a \Rightarrow b ≤ b ∨ a$$
+
+       Therefore, $a ∨ b ≤ b ∨ a$.
+
+       By renaming, $a ∨ b = b ∨ a$.
+       
+     \end{proof}
+       
+
+     \begin{lemma}\label{lem:associative}
+       The operation $∧$, $∨$ are associative.
+     \end{lemma}
+
+     \begin{proof}
+
+       It's suffices to prove that $(a ∧ b) ∧ c ≤ a ∧ (b ∧ c)$.
+
+       $$(a ∧ b) ∧ c ≤ a ∧ b ≤ a$$ %1
+       $$(a ∧ b) ∧ c ≤ a ∧ b ≤ b$$ %2
+       $$(a ∧ b) ∧ c ≤ c$$         %3
+
+       Therefore
+
+       $$(a ∧ b) ∧ c ≤ b ∧ c$$
+
+       Finally:
+
+       $$(a ∧ b) ∧ c ≤ a ∧ (b ∧ c)$$
+
+       By commutativity:
+
+       $$c ∧ (a ∧ b) ≤ (b ∧ c) ∧ a$$
+
+       And, renaming and antisymmetry:
+
+       $$(a ∧ b) ∧ c = a ∧ (b ∧ c)$$
+       
+     \end{proof}
+
+     \begin{lemma}\label{lem:bot-meet}
+       For every $x$, $x ∧ BOT = BOT$.
+     \end{lemma}
+     \begin{proof}
+       Given that $x ∧ BOT ≤ BOT$, then $x ∧ BOT = BOT$.
+     \end{proof}
+
+     \begin{lemma}\label{lem:self}
+       For every $x$, $x ∧ x = x ∨ x = x$.
+     \end{lemma}
+     \begin{proof}
+       $$ x ≤ x, x ≤ x ⇒ x ≤ x ∧ x$$
+       $$ x ∧ x ≤ x ∧ x ⇒ x ∧ x ≤ x$$
+
+       Also,
+
+       $$ x ≤ x, x ≤ x ⇒ x ∨ x ≤ x$$
+       $$ x ∨ x ≤ x ∨ x ⇒ x ≤ x ∨ x$$
+     \end{proof}
+
+     \begin{lemma}\label{lem:filter-ext}
+       Let $B$ be a boolean algebra.
+       
+       If $¬x \not \in F$, then there exists a
+       filter $F^\prime$ such that $F \subseteq F \cup x \subset F^\prime$,
+       and $F^\prime$ is non-degenerate (i.e. $F^\prime \neq B$).
+       
+    \end{lemma}
+    \begin{proof}
+           We can extend $F$ to create a new filter $U^\prime$,
+           $F \cup \{x\} \subset U^\prime \subsetneq B$:
+           
+           Now, define the following sequence:
+
+           $$A_0 = F \cup \{ x ∧ f | f ∈ F \}$$
+           $$A_{i+1} = Cl_{∧}(A_i) \cup Cl_{≤}(A_i)$$
+
+           Where:
+
+           $$Cl_{∧}(Z) = \{ a ∧ b  \vert a, b \in Z \}$$
+           $$Cl_{≤}(L) = \{ z \vert l \in L, z \in B, b ≤ z \}$$
+
+           And $A$ the limit of the sequence:
+
+           $$A = \bigcup_{i=0}^{\infty} A_i$$
+
+           \begin{description}
+             \item[$F \subsetneq A$] $U \subsetneq A_0 \subset A$. 
+             \item[Closure under $∧$]
+               Let $a,\,b \in A$. $a \in A_i$, $b \in A_j$, for some
+               $i$, $j$. Therefore,
+               $a,b \in A_{\max(i,j)}$, and $a ∧ b \in A_{\max(i,j)+1} \subset A$.
+
+             \item[Closure under $≤$]
+               Let $a \in A$. Then, $a \in A_i$ for some $i$. If $b \in B$,
+               $a ≤ b$, then $b ∈ Cl_{≤}(A_i) \subset A_{i+1} \subset A$.
+
+             \item[Bounded by $A_0$]
+               Every element in $x ∈ A$ is greater than or equal to an element
+               $y ∈ A_0$.
+
+               {\em Proof by induction}
+
+               \begin{itemize}
+                 \item For every $x \in A_0$, $x ≥ x \in A_0$. 
+                 \item Assume that all elements in $A_i$ are lower-bounded
+                   by $A_0$.
+
+                   Let $c \in A_{i+1}$. Either:
+                   
+                   \begin{itemize}
+                     \item $c \in Cl_{≤}(A_i)$. Then, for some $b \in A_i$,
+                       $b ≤ c$. By the induction hypothesis, $\exists y \in A_0$,
+                       $y ≤ b ≤ c$.
+
+                     \item $c \in Cl_{∧}(A_i)$. Then, for some $c = a ∧ b$,
+                       $a, b \in A_i$. Then, there exists $a^\prime, b^\prime \in A_0$.
+                       $a^\prime ≤ a$, $b^\prime ≤ b$.
+
+                       By definition of boolean algebra, $a^\prime ∧ b^\prime ≤ a^\prime, b^\prime$,
+                       so $a^\prime ∧ b^\prime ≤ a, b$.
+
+                       Therefore, $a^\prime ∧ b^\prime ≤ a ∧ b$.
+
+                       For $a^\prime ∧ b^\prime$, either:
+
+                       \begin{itemize}
+                         \item $a^\prime ∧ b^\prime = f_1 ∧ f_2 ∈ F \subset A_0$
+                         \item $a^\prime ∧ b^\prime = (x ∧ f_1) ∧ f_2 = x ∧ (f_1 ∧ f_2) ∈ x ∧ F \subset A_0$
+                         \item $a^\prime ∧ b^\prime = x ∧ (x ∧ f_2) = (x ∧ x) ∧ f_2 = x ∧ f_2 ∈ x ∧ F \subset A_0$
+                         \item $a^\prime ∧ b^\prime = (x ∧ f_1) ∧ (x ∧ f_2) = (x ∧ x) ∧ (f_1 ∧ f_2) = x ∧ (f_1 ∧ f_2) ∈ x ∧ F \subset A_0$
+                       \end{itemize}
+
+                       Therefore, $a^\prime ∧ b^\prime = y ∈ A_0$, $y ≤ a ∧ b = c$
+                  \end{itemize}
+
+                   In conclusion, if $A_{i}$ is lower-bound by $A_0$, then
+                   so is $A_{i+1}$.
+               \end{itemize}
+           \end{description}
+
+           Assume $BOT \in A$. Then, there is $y \in A_0$, $y ≤ BOT$,
+           so $BOT = y \in A_0$. Either:
+
+           \begin{itemize}
+             \item $BOT \in F$: This is impossible, because of lemma \ref{lem:bot} and $F \neq B$.
+             \item $BOT = x ∧ u$ for some $u$. Then, because $B$ is
+               a boolean algebra, $u ≤ ¬x$. And, because $U$ is a filter,
+               $¬x \in U$, which is a contradiction.
+           \end{itemize}
+
+           Therefore, $BOT \not \in A$. $F^\prime = A$ is the extension we
+           looked for.
+           
+     \end{proof}
+     
+     \begin{lemma}\label{lem:neg}
+       If $U$ is an ultrafilter, for every $x ∈ B$,
+       $x ∈ U$ iff $¬x \not \in U$.
+       
+     \end{lemma}
+     \begin{proof}
+
+       \begin{description}
+         
+         \item[⇒] Let $x ∈ U$. If $¬x ∈ U$, then $x ∧ ¬x ∈ U$.
+           $x ≤ x$ so $BOT = x ∧ ¬x ∈ U$. This contradicts lemma \ref{lem:bot}.
+
+         \item[⇐] Assume that $x \not \in U$,
+
+           {\em Reduction ad absurdum} Suppose that $¬x \not \in U$. Then,
+           $U$ can be extended into a filter $U^\prime$ by \ref{lem:filter-ext},
+           $U \subsetneq U^\prime \subsetneq B$.
+           
+           But this contradicts $U$ being a maximal filter.
+           
+           Therefore, $¬x \in U$.
+            
+        \end{description}
+    \end{proof}
+
+     \begin{lemma}\label{lem:compl-rev}
+       $a ≤ b$ iff $¬b ≤ ¬a$
+     \end{lemma}
+     \begin{proof}
+       Assume $a ≤ b$. Then $a ∧ ¬b = BOT$, or, equivalently,
+       $¬b ∧ ¬(¬a) = BOT$. Therefore, $¬b ≤ ¬a$.
+     \end{proof}
+
+     \begin{lemma}\label{lem:morgan}
+       Boolean algebras satisfy DeMorgan's laws.
+     \end{lemma}
+
+     \begin{proof}
+       \begin{description}
+         \item[$¬a ∧ ¬b ≤ ¬(a ∨ b)$]
+
+           $$a ∧ ¬a ∧ ¬b = BOT ∧ ¬b = BOT$$
+           $$b ∧ ¬a ∧ ¬b = ¬a ∧ BOT = BOT$$
+
+           By definition of boolean algebra:
+
+           $a ∧ (¬a ∧ ¬b) = BOT \Rightarrow a ≤ ¬(¬a ∧ ¬b)$
+           $b ∧ (¬a ∧ ¬b) = BOT \Rightarrow b ≤ ¬(¬a ∧ ¬b)$
+
+           Therefore,
+
+           $$a ∨ b ≤ ¬(¬a ∧ ¬b)$$
+
+           By lemma \ref{lem:compl-rev},
+
+           $$¬a ∧ ¬b ≤ ¬(a ∨ b)$$
+
+         \item[$¬(a ∨ b) ≤ ¬a ∧ ¬b$]
+
+           By definition of boolean algebra:
+
+           $$a ≤ a ∨ b ⇒ ¬(a ∨ b) ≤ ¬a$$
+           $$b ≤ a ∨ b ⇒ ¬(a ∨ b) ≤ ¬b$$
+
+           Therefore,
+
+           $$¬(a ∨ b) ≤ ¬a ∧ ¬b$$
+       \end{description} 
+
+       Therefore,
+
+       $$¬(a ∨ b) = ¬a ∧ ¬b$$
+
+       In particular, for $c,d ∈ B$.
+
+       $$¬((¬c) ∨ (¬d)) = c ∧ d$$
+
+       which is equivalent to:
+
+       $$¬(c ∧ d) = ¬¬(¬c ∨ ¬d) = ¬c ∨ ¬d$$
+     \end{proof}
+     
+     Let $h_U : B → \text{\bf 2}$, $h_U(x) = TOP$ if $x ∈ U$, $h_U(x) = BOT$ otherwise.
+
+     Now, prove that $h$ is a boolean-algebra homomorphism.
+
+     \begin{description}
+       \item[Preserve $TOP$]
+
+         Let F be a non-empty filter, $x ∈ F$. Then, $TOP ≥ x$, so
+         $TOP ∈ F$. Therefore, non-empty filters contain $TOP$.
+
+         $\{TOP\}$ is a filter, and $ ø \subsetneq \{TOP\} $. Therefore,
+         no maximal filter is empty.
+
+         Therefore $U$ is not empty, so $TOP ∈ U$, and $h(TOP) = TOP$.
+
+       \item
+
+         By lemma \ref{lem:bot}, $BOT \not \in U$. Therefore, $h(BOT) = BOT$.
+
+       \item
+
+         Let $a, b ∈ B$, $a ≤ b$.
+
+         If $h(a) = BOT$, then $h(a) = BOT ≤ h(b)$.
+
+         If $h(a) = TOP$, then $a ∈ U$, and, as $a ≤ b$ and $U$ is a
+         filter, $b ∈ U$. Therefore, $h(a) = TOP ≤ TOP = h(b)$.
+
+       \item[Preserve meets]
+
+         Let $a, b ∈ B$.
+
+         We want to prove $h(a), h(b) = TOP$ iff $h(a ∧ b) = TOP$;
+         if any of the values $h(a)$, $h(b)$ is $BOT$, the result should
+         be $BOT$.
+         
+         This equivalent to $a, b ∈ U$ iff $a ∧ b ∈ U$ 
+
+         \begin{description}
+           \item[⇒] If $a, b ∈ U$, then $a ∧ b ∈ U$, because $U$ is a filter.
+           \item[⇐] $a ∧ b ∈ U$. Assume $a \not \in U$.
+
+             Then, by lemma \ref{lem:neg}, $¬a ∈ U$.
+
+             By lemma \ref{lem:associative} and \ref{lem:bot-meet}.
+             
+             \begin{align*}
+               ¬a ∧ (a ∧ b) = (¬a ∧ a) ∧ b = BOT ∧ b = BOT
+             \end{align*}
+
+             But $BOT \not \in U$, so our assumption is false: $a \in U$.
+
+             The same holds for $b$.
+         \end{description}
+
       
+       \item[Preserve complement]
 
-     %% TODO: Ultrafilter properties
+         By lemma \ref{lem:neg}:
+
+         $$h(a) = TOP \Rightarrow a ∈ U \Rightarrow ¬a \not \in U \Rightarrow h(¬a) = BOT = ¬h(a)$$
+         
+         $$h(a) = BOT \Rightarrow a \not \in U \Rightarrow ¬a ∈ U \Rightarrow h(¬a) = TOP = ¬h(a)$$
+         
+       \item[Preserve joins]
+
+         $h$ preserving joins is equivalent to: 
+
+         $$h(a) = BOT \text{ and } h(b) = BOT \text{ iff } h(a ∨ b) = BOT$$
+
+         or, by lemma \ref{lem:neg}:
+
+         $$h(¬a) = TOP \text{ and } h(b) = TOP \text{ iff } h(¬(a ∨ b)) = TOP$$
+         
+         or, by lemma \ref{lem:morgan}:
+         
+         $$h(¬a) = TOP \text{ and } h(¬b) = TOP \text{ iff } h((¬a) ∧ (¬b)) = TOP$$
+
+
+         … which is true, because $h$ has been shown to preserve meets. 
+
+    \end{description}
+
+  \end{enumerate}
+
+  
+     
   \item[18.]
 
     We want to represent an arbitrary monoid as a set of homomorphisms.
