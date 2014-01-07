@@ -1,0 +1,61 @@
+%@ chapter=2
+%@ exercise=16
+%@ author=Fabian
+
+\begin{itemize}
+	\item Define the mapping $F$ from the product category $\cat{C(λ)} × \cat{C(λ)}$ into the category $\cat{C(λ)}$ as follows.
+
+		\begin{enumerate}
+			\item $(A, B) ↦ A × B$
+			\item $(f, g) ↦ λx.\ ⟨f\ \fst{x},g\ \snd{x}⟩$
+		\end{enumerate}
+
+		Show that $F$ is a functor.
+
+		\begin{enumerate}
+			\item $F$ obviously maps objects (arrows) to objects (arrows) and respects domains and codomains when mapping morphisms.
+			\item $F$ respects identity arrows.
+				\begin{align}
+					F(id_{(A,B)}) & = F((id_A,id_B)) \\
+					& = λx.\ ⟨id_A\ \fst{x},id_B\ \snd{x}⟩ \\
+					& = λx.\ ⟨\fst{x},\snd{x}⟩ \\
+					& = λx.\ x \\
+					& = id_{A × B}
+				\end{align}
+			\item $F$ respects arrow composition.
+				\begin{align}
+				F(a ∘ b) & = F((f_1,g_1) ∘ (f_2,g_2)) \\
+				& = λx.\ ⟨(f_1 ∘ f_2)\ \fst{x},(g_1 ∘ g_2)\ \snd{x}⟩ \\
+				& = λx.\ ⟨f_1\ (f_2\ \fst{x}),g_1 (g_2\ \snd{x})⟩ \\
+				& = λx.\ (λx.\ ⟨f_1\ \fst{x},g_1\ \snd{x})⟩)\ ⟨f_2\ \fst{x},g_2\ \snd{x}⟩ \\
+				& = λx.\ F(a)\ ⟨f_2\ \fst{x},g_2\ \snd{x}⟩ \\
+				& = λx.\ F(a)\ ((λx.\ ⟨f_2\ \fst{x},g_2\ \snd{x}⟩)\ x) \\
+				& = λx.\ F(a)\ (F(b)\ x) \\
+				& = F(a) ∘ F(b)
+				\end{align}
+		\end{enumerate}
+
+		Therefore, $F$ satisfies the functor axioms.
+	\item Given a type $A$, define the mapping $A → (—) : \cat{C(λ)} → \cat{C(λ)}$ on the category of types as follows.
+
+		\begin{enumerate}
+			\item $X ↦ A → X$
+			\item $f ↦ λg.\ f ∘ g$
+		\end{enumerate}
+
+		\begin{enumerate}
+			\item $A → (—)$ obviously maps objects (arrows) to objects (arrows) and respects domains and codomains when mapping morphisms.
+			\item $A → (—)$ respects identity arrows.
+				$$A → id_X = λg.\ id_X ∘ g = λg.\ g = id_{A → X}$$
+			\item $A → (—)$ respects arrow composition.
+				\begin{align}
+					A → (a ∘ b) & = λg.\ (a ∘ b) ∘ g \\
+					& = λg.\ a ∘ (b ∘ g) \\
+					& = λg.\ (A → a)\ (b ∘ g) \\
+					& = λg.\ (A → a)\ ((A → b)\ g) \\
+					& = (A → a) ∘ (A → b)
+				\end{align}
+		\end{enumerate}
+
+		Therefore, $A → (—)$ satisfies the functor axioms.
+\end{itemize}
