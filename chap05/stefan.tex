@@ -1,0 +1,45 @@
+%use lualatex/xelatex to compile this
+\documentclass{scrartcl}
+\input{../StefanMacros.tex}
+\usepackage{newunicodechar}
+\usepackage{tikz}
+\newunicodechar{Ø}{\emptyset}
+\tikzset{node distance=3.5cm, auto}
+
+\begin{document}
+    \section*{Exercise 1}
+    
+    Let $f × g : P → X$ be the product of $f$ and $g$ in the slice category (note: This is not the normal product!), with projections $π_f : P → A$ and $π_g : P → B$ such that $f \circ π_f = g \circ π_g = f × g$ (this is what it means to be a morphism in the slice category).
+    
+    Because of this equality we immediately know that $π_f$ and $π_g$ factorise uniquely over $A ×_{X} B$ via a morphism $i_1 : P → A ×_{X} B$ (this uses the property of the pullback).
+    
+    On the other hand $p_1$ and $p_2$ are morphisms from $f \circ p_1 = g \circ p_2$ to $f$ and $g$ in the slice category respectively, therefore they factorise uniquely over the product $f × g$ via some unique morphism $i_2: A ×_{X} B → P$. By uniqueness, we have that $i_1$ and $i_2$ must be inverse to one another and therefore pullbacks are exactly products in the slice category.
+    
+    \begin{figure}[H]\centering\begin{tikzpicture}
+      \node  (X) {$X$} ;
+      \node  (A) [left of=X] {$A$} ;
+      \node  (B) [right of=X] {$B$} ;
+      \node  (P) [above of=X] {$P$} ;
+      \node  (AB) [above of=P] {$A ×_X B$} ;
+      
+      \draw[->] (A) to node {$f$} (X);
+      \draw[->] (B) to node {$g$} (X);
+      \draw[->] (P) to node {$π_f$} (A);
+      \draw[->] (P) to node {$π_g$} (B);
+      \draw[->] (P) to node {$f × g$} (X);
+      \draw[->] (AB) to node {$p_1$} (A);
+      \draw[->] (AB) to node {$p_2$} (B);
+    \end{tikzpicture}
+    \end{figure}
+    
+    \section*{Exercise 7}
+    
+    Let $L$ be the limit of $D$ with (with morphisms $l_i : L → C_i$).\\
+    Let $L'$ be the limit of $Hom(C, -) \circ D$ (with morphisms $l'_i : L' → Hom(C, C_i)$).\\
+
+    We have to show that $Hom(C, L) \cong L'$.
+    
+    The unique morphism from $Hom(C,L)$ to $L'$ exists since $L'$ is a limit and mapping a cone via a functor yields a cone. The other direction is the interesting one:
+    
+    Let $x ∈ L'$ be an element of $L'$ (note that we are in {\bf Sets}). The morphisms $l'_i$ map this $x$ to morphisms $l'_i(x) : C → C_i$. Because $L$ was a limit over $D$, we know that there is a factorisation through $L$, i.e. there exists a unique $ξ : C → L$ such that $l'_i(x) = l_i \circ ξ$. In other words, we indentified the unique element of $Hom(C,L)$ that behaves under $l_i$ in the same way that $x$ behaves under $l'_i$. Since $x ∈ L'$ was chosen arbitrarily, we conclude that there is a unique map from $L' → Hom(C,L)$ that makes everything commute. This completes the contruction of the isomorphism and $Hom(C,L)$ is therefore also a limit of $Hom(C,-) \circ D$.
+\end{document}
