@@ -1,0 +1,97 @@
+digraph G {v0 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 1 & 1 & 1
+\end{array}$
+"]
+v1 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 1 & 1 & 2
+\end{array}$
+"]
+v2 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 1 & 2 & 1
+\end{array}$
+"]
+v3 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 1 & 2 & 2
+\end{array}$
+"]
+v4 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 2 & 1 & 1
+\end{array}$
+"]
+v5 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 2 & 1 & 2
+\end{array}$
+"]
+v6 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 2 & 2 & 1
+\end{array}$
+"]
+v7 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+1 & 2 & 2 & 2
+\end{array}$
+"]
+v8 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 1 & 1 & 1
+\end{array}$
+"]
+v9 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 1 & 1 & 2
+\end{array}$
+"]
+v10 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 1 & 2 & 1
+\end{array}$
+"]
+v11 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 1 & 2 & 2
+\end{array}$
+"]
+v12 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 2 & 1 & 1
+\end{array}$
+"]
+v13 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 2 & 1 & 2
+\end{array}$
+"]
+v14 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 2 & 2 & 1
+\end{array}$
+"]
+v15 [texlbl="$\begin{array}{cccc}
+a & b & c & d \\ 
+2 & 2 & 2 & 2
+\end{array}$
+"]
+v0 -> v4
+v0 -> v5
+v0 -> v6
+v0 -> v7
+v0 -> v12
+v0 -> v13
+v0 -> v14
+v0 -> v15
+v4 -> v4
+v4 -> v5
+v4 -> v6
+v4 -> v7
+v4 -> v12
+v4 -> v13
+v4 -> v14
+v4 -> v15
+}
