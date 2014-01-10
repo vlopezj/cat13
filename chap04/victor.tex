@@ -1,5 +1,5 @@
 % For plaintext use only
-\documentclass{article}
+\documentclass[a4paper,notitlepage]{article}
 
 \usepackage{xltxtra}
 \usepackage{amsmath}
@@ -15,6 +15,7 @@
 
 \newtheorem{observation}{Observation}
 \newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
 
 \tikzset{node distance=2cm, auto}
 
@@ -22,9 +23,12 @@
 \title{Chapter 4}
 
 \begin{document}
-
+\maketitle
 \begin{enumerate}
   \item[4.]
+
+    {\em Use the Eckmann-Hilton argument to prove that every monoid in the
+category of groups is an internal group.}
 
     Let $\left ( \vert G \vert, ·, 1_G \right)$ be an object
     in {\bf Grp}. We define the following monoid in that category.
@@ -124,24 +128,34 @@
     Then,
 
     \begin{align*}
-        & f^\prime \circ g^\prime                          & = \\
-      = & (id_A \circ f^\prime \circ g^\prime) \circ id_C   & =  \\ 
-      = & (id_A \circ f \circ g^\prime) \circ id_C        & = &&\text{$f^\prime \sim f$} \\ 
-      = & (f \circ g^\prime \circ id_C)                   & = \\
-      = & (f \circ g \circ id_C)                        & = &&\text{$g^\prime \sim g$} \\ 
-      = & f \circ g                                     & \\ 
+        f^\prime \circ g^\prime &= (id_A \circ f^\prime \circ g^\prime) \circ id_C     \\ 
+      &= (id_A \circ f \circ g^\prime) \circ id_C         \tag{$f^\prime \sim f$} \\ 
+      &= (f \circ g^\prime \circ id_C)                    \\
+      &= (f \circ g \circ id_C)                                 \tag{$g^\prime \sim g$} \\ 
+      &= f \circ g                                      \\ 
     \end{align*}
 
     $$\therefore f^\prime \circ g^\prime \sim f \circ g$$
     
   \item[8.]
 
+    \begin{definition}
+      Given functors $F, G : \text{\bf C} → \text{\bf D}$ such that for all
+      $C ∈ \text{\bf C}$, $FC = GC$, we define $\sim \subset \text{\bf D}_1 × \text{\bf D}_1$ as follows:
+      
+    \begin{eqnarray*}{rcl}
+       f \sim g \equiv &        & dom(f) = dom(g) \\
+                       & \wedge & cod(f) = cod(g) \\
+                       & \wedge & \forall \text{\bf E} \forall H : \text{\bf D} → \text{\bf E} : HF = HG ⇒ H(f) = H(g) \\
+    \end{eqnarray*}
+      
+      \end{definition}
+
     \begin{observation}\label{obs:eq-alpha}
     For every $\alpha \in \text{\bf C}$, $F(\alpha) \sim G(\alpha)$.
     \end{observation}
     \begin{proof}
       Let $f = Fα$, $g = Gα$.
-      
       $$dom(f) = dom(Fα) = F(dom(α)) = G(dom(α)) = dom(Gα) = dom(g)$$
       $$cod(f) = cod(Fα) = F(cod(α)) = G(cod(α)) = cod(Gα) = cod(g)$$
 
@@ -149,28 +163,11 @@
     \end{proof}
 
     The equivalence relation $\sim$ can be described as “gluing
-    together” arrows in $D$ using functors $F$ and $G$.
+    together” arrows in $\text{\bf D}$ using functors $F$ and $G$.
 
-    We could, in principle, define:
-
-    $$ f R g \text{ iff } \exists α \in C. f = F(α) = G(α) = g $$
-
-    This definition has two potential issues:
-
-    \begin{itemize}
-      \item It may not an equivalence relation. For example, it's not
-        reflexive for arrows outside the image of $F$ or $G$. 
-      \item It may not always behave well under composition. If
-        $f R g$, and $a R b$, we would like to have
-        $a \circ f = b \circ g$, even if $a \circ f$ and $b \circ f$ have
-        no preimages in $C$.
-    \end{itemize}
-
-    However, if we extend $R$ so that it is a congruence relation $\sim$.
-    both the above properties should hold.
-
-    $$ f \sim g \equiv dom(f ) = dom(g) \wedge cod(f ) = cod(g) \wedge \forall E \forall H : D → E : HF = HG ⇒ H(f ) = H(g)$$
-
+    \begin{proposition}
+    $\sim$ is a congruence.
+    \end{proposition}
     \begin{proof}
 
       A congruence relation is an equivalence relation on arrows which
@@ -190,10 +187,9 @@
 
           \begin{itemize}
 
-           \item
+           \item Domains and codomains match.
 
                $$dom(bfa) = dom(b) = dom(bga)$$
-             
                $$cod(bfa) = cod(a) = cod(bga)$$
 
             \item
@@ -211,8 +207,9 @@
           $$ \therefore bfa \sim bga $$
     \end{itemize}
 
-    Therefore $\sim$ defines a congruence relation. As we hoped for,
-    the composition of congruent arrows is congruent (see exercise 7).
+    Therefore $\sim$ defines a congruence relation.
+    In particular, the composition of congruent arrows is congruent
+    (see exercise 7).
 
     \end{proof}
 
@@ -295,9 +292,9 @@
               For any arrow $α$:
               
               \begin{align*}
-                    \overline{Z} P(α) &= Z (I P(α)))          &=    &&\text{definition of $\overline{Z}$}   \\
-                                 &= Z (I [α]))           &=    &&\text{definition of $P$}   \\
-                                 &= Z (α))               &     &&\text{$I[α] \sim α, ZF = ZG$}   \\
+                    \overline{Z} P(α) &= Z (I P(α)))         && \text{definition of $\overline{Z}$}   \\
+                                 &= Z (I [α]))              && \text{definition of $P$}   \\
+                                 &= Z (α))                   && \text{$I[α] \sim α, ZF = ZG$}   \\
               \end{align*}  
 
               Therefore, the diagram above commutes.

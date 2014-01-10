@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper,notitlepage]{article}
 
 \usepackage{xltxtra}
 \usepackage{amsmath}
@@ -12,6 +12,9 @@
 \usetikzlibrary{positioning}
 \setmathfont{xits-math.otf}
 
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
 
 \tikzset{node distance=2cm, auto}
 
@@ -19,11 +22,51 @@
 \title{Chapter 5}
 
 \begin{document}
-
+\maketitle
 \begin{enumerate}
 
   \item[8.]
 
+    \begin{proposition}
+      
+    For a category {\bf C}, define the objects of $\text{\bf Par}(\text{\bf C})$
+    as those of {\bf C}, and an arrow $f : A → B$ as a pair $(\vert f \vert, U_f)$,
+    where $U_f$ is a subobject of $A$,  $\vert f \vert : U_f → B$.
+
+    Composition is defined by taking a pullback and then composing:
+
+           
+           \begin{tikzpicture}
+
+             \node (A) {$A$};
+             \node (Uf) [above of=A] {$U_f$};
+
+             \node (B) [right of=Uf] {$B$};
+             \node (Ug) [above of=B] {$U_g$};
+
+             \node (Ug2) [above of=Uf] {$\vert f \vert ^\star (U_{g})$};
+
+             \node (C) [right of=Ug] {$C$};
+
+             \draw [>->] (Uf) to node {$m_1$} (A);
+             \draw [>->] (Ug) to node {$m_2$} (B);
+
+             \draw [->]  (Uf) to node {$\vert f \vert$} (B);
+             \draw [->]  (Ug) to node {$\vert g \vert$} (C);
+             
+
+
+             \draw [>->] (Ug2) to node {$m_2^\prime$} (Uf);
+             \draw [->]  (Ug2) to node {$\bar{\vert f \vert}$} (Ug);
+          \end{tikzpicture}
+
+
+    The composition of two arrows is in $\text{\bf Par}(\text{\bf C})$, and
+    $\text{\bf Par}(\text{\bf C})$ is a category.
+
+    \end{proposition}
+
+    \begin{proof}
     \begin{itemize}
       \item
 
@@ -306,25 +349,33 @@
         
    \end{itemize}
 
+   \end{proof}
+
    \item[13.]
 
-     In order to discuss the preservation of commutativity and finite order
-     by limits, we first need to compute the structures defined by them.
-     The process is analogous to the limits for groups described in
-     the lecture notes.
+     Consider the sequences:
+
+     $$ M_0 → M_1 → M_2 → … \, , \, g_i : M_i → M_{i+1} $$
+     $$ N_0 ← N_1 ← N_2 ← … \, , \, g_i : N_{i+1} → N_{i} $$
+     
      
      For every chain of homomorphisms,  $\left\{g_i\right\}_{i=1}^\infty$, define:
      $$g_{i,k} = g_{k-1} \circ … \circ g_{i+1} \circ g_i$$
 
      In particular, $g_{i,i} = id_{cod(g_i)}$.
 
-     Limits in {\bf Mon} can be defined in terms of products and equalizers
-     in {\bf Set}. Universality in Set is derived by factoring uniquely
+
+     We are interested in the limits and colimits of these sequences.
+
+     Limits in {\bf Mon} can be defined in terms of (co)products and (co)equalizers
+     in {\bf Set}. If this constructions have adequate properties, they
+     can be given a monoid structure, which gives existence in {\bf Mon}.
+
+     Uniqueness in {\bf Set} is derived by factoring uniquely
      over (co)products and (co)equalizers, which are themselves universal.
 
-     Then, universality in {\bf Mon} can be deduced from the
-     universality in {\bf Set}.
-     
+     For example:
+
      \begin{itemize}
        \item
          
@@ -336,7 +387,7 @@
          \begin{tikzpicture}
            \node (Mi) {$M_i$};
            \node (Mip) [right of=Mi] {$M_{i+1}$};
-           \node (Cop) [below of=Mi] {$\coprod M_i$};
+           \node (Cop) [below of=Mip] {$\coprod M_i$};
            \node (Q) [right of=Cop] {$\faktor{\coprod M_i}{\sim}$};
 
            \draw[->] (Cop) to node {$\pi$} (Q);
@@ -366,7 +417,7 @@
 
          \end{itemize}
          
-         The arrows $\pi \circ \in_i : M_i → M$ are monoid homomorphisms.
+         The arrows $\pi \circ in_i : M_i → M$ are monoid homomorphisms.
 
          $M$ is universal for the property of having arrows from every
          element in the chain to itself, as shown by the following diagram:
@@ -397,8 +448,9 @@
          
          $$\lim_{\longleftarrow} M_i \cong M_0$$
 
-         The limit of this chain is its first element.
-
+         Instead of constructing the limit in {\bf Set}, we
+         can realize that first element of the chain could be a limit.
+         
          $M_0$ is a monoid, and is universal; as shown by the following
          family of diagrams:
 
@@ -451,24 +503,42 @@
 
            \draw[<-] (N0p) to node {$g_{i,0}$} (N0);
            \draw[<-,dotted] (Z) to node {$z_0$} (N0p);
+           \draw[<-] (Z) to node {$z_i$} (N0);
+           \draw[<-] (Z) to node {$z_{i+1}$} (Ni);
+           \draw[<-] (N0) to node {$g_i$} (Ni);
+           
+         \end{tikzpicture}
+
+          Uniqueness of $z_0$ can be seen when $i = 0$.
+          
+          \begin{tikzpicture}
+
+           \node (N0) {$N_{0}$};
+           \node (N0p) [below of=N0] {$N_0$};
+           \node (Ni) [right of=N0] {$N_{1}$};
+           \node (Z)  [right of=N0p] {$Z$};
+
+           \draw[<-] (N0p) to node {$g_{0,0} = id_{N_0}$} (N0);
+           \draw[<-,dotted] (Z) to node {$z_0$} (N0p);
            \draw[<-] (Z) to node {$z_0$} (N0);
            \draw[<-] (Z) to node {$z_{1}$} (Ni);
            \draw[<-] (N0) to node {$g_i$} (Ni);
            
          \end{tikzpicture}
 
+
        \item  
 
          $$N = \lim_{\longleftarrow} N_i = \left . {\prod N_i} \right \vert _P$$
 
-         Where $P$ is a predicate such that the following family of
+         … where $P$ is a predicate such that the following family of
          diagrams in {\bf Set} commutes, $i \in \mathbb{N}$.
 
          \begin{tikzpicture}
            \node (Ni) {$N_i$};
            \node (Nip) [left of=Ni] {$N_{i+1}$};
-           \node (Prod) [below of=Nip] {$\prod N_i$};
-           \node (Q) [below of=Ni] {$\left . {\prod N_i} \right \vert _P$};
+           \node (Prod) [below of=Ni] {$\prod N_i$};
+           \node (Q) [right of=Prod] {$\left . {\prod N_i} \right \vert _P$};
 
            \draw[<-<] (Prod) to node {$\iota$} (Q);
            \draw[<-] (Ni) to node {$g_i$} (Nip);
@@ -491,16 +561,16 @@
 
          \begin{tikzpicture}
 
-           \node (N0) {$N_0$};
+           \node (N0) {$N_{i}$};
            \node (N) [below of=N0] {$N$};
-           \node (Mi) [right of=N0] {$N_i$};
+           \node (Mi) [right of=N0] {$N_{i+1}$};
            \node (Z)  [right of=N0p] {$Z$};
 
-           \draw[<-] (N0p) to node {$id_{N_0}$} (N0);
-           \draw[<-,dotted] (Z) to node {$z$} (N);
-           \draw[<-] (Z) to node {$z_0$} (N0);
-           \draw[<-] (Z) to node {$z_i$} (Mi);
-           \draw[<-] (N0) to node {$g_{0,i}$} (Mi);
+           \draw[->] (N0p) to node {$\pi_{i}\vert_N$} (N0);
+           \draw[->,dotted] (Z) to node {$z$} (N);
+           \draw[->] (Z) to node {$z_i$} (N0);
+           \draw[->] (Z) to node {$z_{i+1}$} (Mi);
+           \draw[<-] (N0) to node {$g_i$} (Mi);
            
          \end{tikzpicture}
          
@@ -515,6 +585,9 @@
      \begin{enumerate}
 
        \item[a.]
+
+         {\em Suppose that all $M_n$ and $N_n$ are abelian groups.
+           Are the four (co)limits abelian groups? }
 
          Cases 2 and 3 are trivial, because the limit monoids are
          one of the original monoids in the chain.
@@ -539,6 +612,9 @@
 
        \item[b.]
 
+         {\em Suppose that all $M_n$ and $N_n$ are finite groups.
+           Are the four (co)limits finite groups?}
+
          Cases 2 and 3 are trivial, because the limit is one of the
          original finite groups in the chain; all finite groups have
          finite order.
@@ -554,8 +630,10 @@
          groups. The integers modulo ${i}$ are all finite groups of
          order $i$.
 
-         The infinite tuple $(1, …, 1) \in M$. However, for every $k > 0$,
-         $k·(1, …, 1) \neq 0_M$.
+         The infinite tuple $(1, …, 1) \in M$. However, this element
+         doesn't have finite order:
+         
+         $$\forall k > 0 \quad k·(1, …, 1) \neq 0_M \text{ .}$$
          
          
      \end{enumerate}

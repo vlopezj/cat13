@@ -1,4 +1,4 @@
-\documentclass[notitlepage]{article}
+\documentclass[a4paper,notitlepage]{article}
 
 \usepackage{xltxtra}
 \usepackage{amsmath}
@@ -11,6 +11,7 @@
 \usepackage{fontspec}
 \usepackage[tikz]{dot2texi}
 \setmathfont{xits-math.otf}
+\usepackage{multicol}
 
 \newtheorem{observation}{Observation}
 \newtheorem{proposition}{Proposition}
@@ -28,11 +29,6 @@
      
    \item[ 2.]
 
-     \begin{observation}\label{obs:commassoc}
-       Products in a cartesian closed category are associative and
-       commutative, up to isomorphism. 
-     \end{observation}
-     
      \begin{enumerate}
 
        \item[a)]
@@ -161,21 +157,18 @@
 
         \item[Existence] 
 
-          The evaluation function is constructed from the underlying
-          exponential objects.
-          
 
       \begin{tikzpicture}[node distance=3cm]
         \node (ABC) {$\left (A^B \right )^C \times (B \times C)$};
-        \node (ACB) [left=1 of ABC] {$\left ( \left ( A^B \right )^C \times C \right ) \times B$};
-        \node (DCB) [left=2 of ACB] {$(D \times C) \times B$};
-        \node (DBC) [left of= DCB] {$D \times (B \times C)$};
+        \node (ACB) [below=1 of ABC] {$\left ( \left ( A^B \right )^C \times C \right ) \times B$};
+        \node (DCB) [below=2 of ACB] {$(D \times C) \times B$};
+        \node (DBC) [below of= DCB] {$D \times (B \times C)$};
         
-        \node (AB)  [below of=ACB] {$A^B \times B$};
-        \node (A)   [below of=AB]  {$A$};
+        \node (AB)  [right=2 of ACB] {$A^B \times B$};
+        \node (A)   [right of=AB]  {$A$};
 
         \draw [->,bend right] (DBC) to node {$f$} (A);
-        \draw [->] (DCB) to node[left] {$f \circ \iota$} (A);
+        \draw [->,swap] (DCB) to node {$f \circ \iota$} (A);
         \draw [->] (DCB) to node {$\overline{f \circ \iota} \times id_B$} (AB);
         \draw [->] (DCB) to node {$(\overline{\overline{f \circ \iota}} \times id_C) \times id_B$} (ACB);
 
@@ -185,26 +178,49 @@
         \draw [->] (ACB) to node {$\epsilon_{C} \times id_B$} (AB);
         \draw [->] (AB) to node {$\epsilon_B$} (A);
 
-        \draw [->, bend left] (ABC) to node {$\epsilon$} (A);
+        \draw [->, bend left, dashed] (ABC) to node {$\epsilon$} (A);
         
-        \draw [->, bend left] (ACB) to node {$\epsilon_{CB}$} (A);
+        \draw [->, bend left, dashed] (ACB) to node {$\epsilon_{CB}$} (A);
 
-        \draw [->,bend left] (DBC) to node {$\overline{\overline{f \circ \iota}} \times id_{B\times C}$} (ABC);
+        %\draw [->,bend left] (DBC) to node {} (ABC);
       \end{tikzpicture}
 
-      The first overlining corresponds to the exponential object $A^B$,
-      while the second one corresponds to $(A^B)^C$. In the second case,
-      all the objects and arrows in the exponential object definition
-      are mapped by the functor $(\_ \times B)$:
+      $\iota$ is the canonical isomorphism for the commutativity and
+      associativity of products. 
 
-      $$(\_ \times B)(X) = X \times B$$
+      An overlined arrow name signifies the transpose of that function
+      given some exponential object. The first overlining of $f \circ ι$ corresponds to the
+      exponential object $A^B$, while the second one corresponds to
+      $(A^B)^C$.
 
-      $$(\_ \times B)(α) = α \times id_B$$
+      Functors preserve commutativity of diagrams.
+      In the case of $\left ( A^B \right )^C$, all the objects and arrows in the
+      exponential object definition are mapped by the functor $(— \times B)$
+
+      $$(— \times B)(X) = X \times B$$
+
+      $$(— \times B)(α) = α \times id_B$$
+
+      The transpose of $f$ together with the identity arrow is:
+
+      \begin{equation*}
+      \bar{f} \equiv \overline{\overline{f \circ \iota}} \times id_{B\times C} :
+               D × (B × C) → \left (A^B \right )^C \times (B \times C)\text{ .}
+      \end{equation*}
+      
+      The evaluation function $ε$ is constructed from the underlying
+      exponential objects.
+
+      $$\epsilon_{CB} \equiv \epsilon_B \circ (\epsilon_C × id_B)$$
+
+      $$\epsilon \equiv ι  \epsilon_{CB}$$
+      
+      The diagram above commutes. 
 
       \item[Uniqueness]
 
         Let $z, z' : D  → (A^B)^C$, and
-        $\langle z, id_{B \times C} \rangle, \langle z^\prime, id_{B \times C} \rangle :$
+        $$z × id_{B \times C} , z^\prime × id_{B \times C}: D × (B × C) → (A^B)^C × (B × C)$$
         such that the diagram above commutes.
 
         The notation $\iota$ has been overloaded to stand for any of the
@@ -213,24 +229,22 @@
 
         Then:
 
-        $$f = \epsilon \circ \langle z, id_{B \times C} \rangle = \epsilon \circ \langle z^\prime, id_{B \times C} \rangle = f$$
+        $$f = \epsilon \circ \left ( z ×  id_{B \times C}  \right ) = \epsilon \circ \left ( z^\prime ×  id_{B \times C}  \right ) = f$$
         
-        $$f \circ \iota = \epsilon \circ \langle z, id_{B \times C} \rangle \iota = \epsilon \circ \langle z^\prime, id_{B \times C} \rangle \iota = f \circ \iota$$
+        $$f \circ \iota = \epsilon \circ \left ( z ×  id_{B \times C}  \right ) \circ \iota = \epsilon \circ \left ( z^\prime ×  id_{B \times C}  \right ) \circ \iota = f \circ \iota$$
         
-        $$g_1 = \epsilon_{BC} \iota \circ \langle z, \langle id_B, id_C \rangle \rangle \iota = \epsilon_{BC} \iota \circ \langle z^\prime, \langle id_B, id_C \rangle \rangle \iota = g_1$$
+        $$f \circ \iota = \epsilon_{BC} \circ \iota \circ \left ( z ×  id_B × id_C  \right ) \circ \iota = \epsilon_{BC} \circ \iota \circ \left ( z^\prime ×  id_B × id_C  \right ) \circ \iota = f \circ \iota$$
         
-        $$\epsilon_{BC} \circ \langle \langle z, id_C \rangle id_B \rangle = \epsilon_{BC} \circ \langle \langle z^\prime, id_C \rangle , id_B \rangle$$
+        $$f \circ \iota = \epsilon_{BC} \circ \left ( \left ( z ×  id_C  \right ) ×   id_B  \right ) = \epsilon_{BC} \circ \left ( \left ( z^\prime ×  id_C  \right )  ×  id_B  \right )$$
         
-        $$\epsilon_{B} \circ \langle \epsilon_{C}, id_{B} \rangle \circ \langle \langle z, id_C \rangle id_B \rangle = \epsilon_{B} \circ \langle \epsilon_{C}, id_B \rangle \circ \langle \langle z^\prime, id_C \rangle , id_B \rangle$$
+        $$f \circ \iota = \epsilon_{B} \circ \left ( \epsilon_{C} ×  id_{B}  \right ) \circ \left ( \left ( z ×  id_C  \right ) ×  id_B  \right ) = \epsilon_{B} \circ \left ( \epsilon_{C} ×  id_B  \right ) \circ \left ( \left ( z^\prime ×  id_C  \right )  ×  id_B \right )$$
         
-        $$\epsilon_{B} \circ \langle \epsilon_C \circ \langle z, id_C \rangle id_B \rangle = \epsilon_{B} \circ \langle \epsilon_C \circ \langle z^\prime, id_C \rangle , id_B \rangle$$
+        $$f \circ \iota = \epsilon_{B} \circ \left ( \left ( \epsilon_C \circ \left ( z ×  id_C  \right ) \right ) × id_B \right )   = \epsilon_{B} \circ \left ( \left ( \epsilon_C \circ \left ( z^\prime ×  id_C  \right ) \right )  ×  id_B  \right )$$
 
-        Universality of ($A^B$):
-
-        $$\epsilon_C \circ \langle z, id_C \rangle = \epsilon_C \circ \langle z^\prime, id_C \rangle$$
+        Universality of ($A^B$), $(— × B)$ is injective:
+        $$\overline{f \circ \iota} = \epsilon_C \circ \left ( z × id_C \right ) = \epsilon_C \circ \left ( z^\prime × id_C \right )$$
         
         Universality of ($(A^B)^C$)
-        
         $$z = z^\prime$$
 
      \end{description}
@@ -265,9 +279,11 @@
      $\bar{T} = \{ \psi \vert \phi \in G_v, \psi(T) \subseteq \{ v_2 \} \}$
 
      The set of edges in the exponential graph is $S \times T$. In particular,
-     every $\phi$ which is a proper graph homomorphism has a self-edge.
+     every $\phi$ which is a graph homomorphism has a self-edge.
 
-     {\em Example:}
+     {\em Example:} Construct the exponential graph $2^G$. 
+     
+     \begin{multicols}{2}
      
      \begin{dot2tex}[neato]
        \input{ex5.hs/graph2.dot}
@@ -277,11 +293,24 @@
        \input{ex5.hs/graphG.dot}
      \end{dot2tex}
 
+     \end{multicols}
+
      {\Large
      \begin{dot2tex}[fdp,autosize,scale=0.5]
        \input{ex5.hs/graph2toG.dot}
      \end{dot2tex}
      }
+     
+     The first graph is $2$, the second is $G$, and the last one is $2^G$.
+
+     Notice the self-edge in node:
+
+     $$ \left [ a \mapsto 1, b \mapsto 2, c \mapsto 1, d \mapsto 1 \right ] $$
+
+     … which is a graph homomorphism itself.
+
+     Haskell code is provided.
+
      
 \end{enumerate}
 \end{document}
