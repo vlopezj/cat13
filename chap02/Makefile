@@ -10,5 +10,5 @@ evgeny.pdf: evgeny.tex
 	xelatex evgeny.tex
 
 clean:
-	rm evgeny.pdf
-	rm victor.pdf
+	rm -f evgeny.pdf
+	rm -f victor.pdf
