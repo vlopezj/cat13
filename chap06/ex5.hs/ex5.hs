@@ -22,6 +22,7 @@ instance (Show v, Show e) => Show (Graph v e) where
                 "edges = " ++ (show $ edgeList g) ++
               "}"
 
+{- Graph with no edge labels -}
 type BaseGraph v = Graph v (v,v)
 
 fromSets' :: (Ord v) => [v] -> [(v,v)] -> Graph v (v,v)
@@ -44,14 +45,20 @@ fromSets v e =
                         return (vv, e)),
             edgeVertex = fst }
 
+member :: Graph v e -> (v,v) -> Bool
+member g = Data.Maybe.isJust . (edgeMap g)
+
+{- Removes labels from the edges of a graph -}
 baseGraph :: Graph v e -> BaseGraph v
 baseGraph g = Graph { vertex = (vertex g),
                       edgeList = map (edgeVertex g) (edgeList g),
                       edgeMap = (\vv -> fmap (const vv) (edgeMap g vv)),
                       edgeVertex = id }
 
-member :: Graph v e -> (v,v) -> Bool
-member g = Data.Maybe.isJust . (edgeMap g)
+
+enumerateMaps :: (Ord a) => [a] -> [b] -> [Map a b]
+enumerateMaps as bs = map Data.Map.fromList (mapM (\a -> map (\b -> (a,b)) bs) as)
+
 
 exponential :: (Ord v1) => (Ord e1) => (Ord v2) => (Ord e2) => Graph v1 e1 -> Graph v2 e2  -> Graph (Map v1 v2) ((Map v1 v2, Map v1 v2), Map e1 e2)
 exponential g1 g2 =
@@ -68,8 +75,9 @@ exponential g1 g2 =
     fromSets v e
         
          
-enumerateMaps :: (Ord a) => [a] -> [b] -> [Map a b]
-enumerateMaps as bs = map Data.Map.fromList (mapM (\a -> map (\b -> (a,b)) bs) as)
+
+
+{- Latex output -}
 
 dot2texAttrValue :: String -> String
 dot2texAttrValue = 
