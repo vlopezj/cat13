@@ -1,0 +1,29 @@
+We show that the diagram below is the coproduct of any two objects (propositions) $φ$ and $ψ$ in the category of proofs.
+
+\begin{tikzpicture}
+  \node (P) {$φ$};
+  \node (PvQ) [below of=P, right of=P] {$φ ∨ ψ$};
+  \node (Q) [right of=PvQ, above of=PvQ] {$ψ$};
+  \draw[->] (P) to node {$i_1$} (PvQ);
+  \draw[->] (Q) to node {$i_2$} (PvQ);
+\end{tikzpicture}
+
+The object $φ ∨ ψ$ exists since it is a legal formula in our formal language. Moreover, the arrows $i_1, i_2$ exist due to the existence of the disjunction introduction rules in our proof system. Given two proofs $p, q$ of the proposition $υ$ there is a proof $[p,q]$ by application of the disjunction elimination rule. Furthermore, the following diagram commutes since the proof identifications $[p,q] ∘ i_1 = p$ and $[p,q] ∘ i_2$ hold by definition.
+
+\begin{tikzpicture}
+  \node (P) {$φ$};
+  \node (PvQ) [below of=P, right of=P] {$φ ∨ ψ$};
+  \node (Q) [right of=PvQ, above of=PvQ] {$ψ$};
+  \node (X) [below of=PvQ] {$υ$};
+  \draw[->] (P) to node {$i_1$} (PvQ);
+  \draw[->] (Q) to node {$i_2$} (PvQ);
+  \draw[->, bend right] (P) to node {$p$} (X);
+  \draw[->, bend left] (Q) to node {$q$} (X);
+  \draw[->] (PvQ) to node {$[p,q]$} (X);
+\end{tikzpicture}
+
+Let $r : φ ∨ ψ → υ$ any other arrow that lets the diagram above commute. The third identification $r = [r ∘ i_1,r ∘ i_2]$ gives us the uniqueness of the proof of $υ$ from $φ ∨ ψ$ with respect to the three identifying equalities. Hence, $⟨φ ∨ ψ,i_1,i_2⟩$ is the coproduct of $φ$ and $ψ$.
+
+$$r = [r ∘ i_1,r ∘ i_2] = [p,q]$$
+
+\hfill $\Box$

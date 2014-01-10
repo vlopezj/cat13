@@ -1,0 +1,54 @@
+%use lualatex/xelatex to compile this
+\documentclass{scrartcl}
+\input{../StefanMacros.tex}
+\usepackage{newunicodechar}
+\newunicodechar{Ø}{\emptyset}
+
+\begin{document}
+    %\section*{Exercise 1}
+    %
+    %We show that every congruence relation corresponds to a normal group and vice versa.
+    %
+    %\begin{desription}
+    %    \item[$⊂$] Let $\sim$ be a congruence relation in a group $G$. Define $N \coloneqq \setgen{g ∈ G}{g \sim e}$ where $e$ is the neutral element of $G$.
+    %    
+    %    $N$ is certainly a normal subgroup of $G$ since if $n ∈ N$ then:
+    %    \begin{description}
+    %        \item[$N$ contains inverses] $n \sim e ⇒ e · n · n^{-1} \sim e · e · n^{-1} ⇒ e \sim n^{-1}$
+    %        \item[$N$ is closed under the group operation] $n_1 \sim e ⇒ e · n_1 · n_2 \sim e · e · n_2 ⇒ n_1 · n_2 \sim n_2 \sim e$.
+    %        \item[$N$ is closed under conjugation] $n \sim e ⇒ g · n · g^{-1} \sim g · e · g^{-1} = e$.
+    %    \end{description}
+    %    \item[$⊃$] 
+    %\end{desription}
+    
+    \section*{Excercise 3} Let $(G,+)$ be an abelian group. We have to show, that $+ : G × G → G$ and $·^{-1} : G → G$ are group homomorphisms.
+    
+    This means that:
+    
+    \[ (g_1 + h_1) + (g_2 + h_2) = (g_1 + g_2) + (h_1 + h_2) \]
+    \[ (g_1 + g_2)^{-1} = g_1^{-1} + g_2^{-1} \]
+    
+    The former is clear since $+$ is commutative, the latter is also clear since $(g_1 + g_2)$ is the inverse to both sides (again using commutativity).
+    
+    The remaining properties of $+$, $i$ and $u$ are simple to check since they are already implicit in the fact that $(G,+)$ is a group.
+    
+    \section*{Excercise 4} Let $M$ be a monoid in the category of groups, i.e. let $(M, ·)$ be a group $\star: M×M → M$ an associative group homomorphism and $e$ the neutral (generalised) element of $M$. Since $\star$ is a group homomorphism we have (mixing infix and prefix notation when it makes things look easier):
+    
+    \[ (g_1· h_1) \star (g_2 · h_2) = \star(g_1· h_1, g_2 · h_2) = \star((g_1,g_2) · (h_1, h_2)) = \star(g_1,g_2) · \star(h_1,h_2) = (g_1 \star g_2) · (h_1 \star h_2) \]
+    
+    By Proposition 4.5 (Eckmann-Hilton) we now know that $\star = ·$ and that this operation is commutative.
+    
+    Therefore $M$ was an abelian group and the operation $·^{-1}$ is a group homomorphism. $M$ can therefore be represented as an internal group (since exactly abelian groups are internal groups in {\bf Grp}).
+    
+    \section*{Excercise 7}
+    
+    This is simple:\\
+    
+    $f \sim f'$ implies $g \circ f \circ id \sim  g \circ f' \circ id$.
+    
+    $g \sim g'$ implies $id \circ g \circ f' \sim  id \circ g' \circ f'$.
+    
+    Using transitivity we get $g \circ f \sim g' \circ f'$.\\
+    
+    \noindent This proofs the claim.
+\end{document}
