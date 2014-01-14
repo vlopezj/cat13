@@ -1,0 +1,34 @@
+% chapter=4
+% exercise=8
+% author=Fabian
+
+We verify the congruence axioms. Let $f \sim g$ for two arrows $f : A → B, g : A' → B'$ in $\cat{D}$, then:
+
+\begin{enumerate}
+	\item $\ \sim\ $ is obviously reflexive, symmetric and transitive since it is defined solely in terms of equality between domains, codomains and map images, which are equivalence relations and, therefore, reflexive, symmetric and transitive.
+	\item By definition of $\ \sim\ $ we have $A = dom(f) = dom(g) = A'$ and $B = cod(f) = cod(g) = B'$.
+	\item Let $a : B → X, b : Y → A$ arbitrary arrows in $\cat{D}$ for any objects $X, Y$ and show $a ∘ f ∘ b \sim a ∘ g ∘ b$. Firstly, observe that the compositions exist and have the same domain and codomain. Secondly, observe $H(a ∘ f ∘ b) = H(a) ∘ H(f) ∘ H(b) = H(a) ∘ H(g) ∘ H(b) = H(a ∘ g ∘ b)$ for any category $\cat{E}$ and functor $H : \cat{D} → \cat{E}$ such that $H ∘ F = H ∘ G$. The first and last equality hold because functors respect arrow composition. Lastly, the second equality holds because $f \sim g$ implies $H(f) = H(g)$ for such $H$ by definition. Finally, $a ∘ f ∘ b \sim a ∘ g ∘ b$ because the $\sim$-axioms are satisfied.
+\end{enumerate}
+
+For $\qcat{D}{\sim}$ to be the coequalizer of $F$ and $G$ in $\cat{Cat}$, firstly, we recall the quotient functor $π : \cat{D} → \qcat{D}{\sim}$ and show $π ∘ F = π ∘ G$. Since $π$ is the identity mapping on objects and $F$ and $G$ agree on objects by assumption, we need only to show $π(F(a)) = π(G(a))$ for an arbitrary arrow $a$ in $\cat{C}$. The latter is the case if and only if $F(a) \sim G(a)$, which is the case if and only if $H(F(a)) = H(G(a))$ for any functor $H$ as above. Since $H ∘ F = H ∘ G$ is assumed already, in particular $H(F(a)) = H(G(a))$ holds and, hence, $F(a) \sim G(a)$. Secondly, we show that $\qcat{D}{\sim}$ satisfies the universal property of a coequalizer and assume $\tuple{\cat{Z}}{Z}$ to be another object and functor pair that makes $F$ and $G$ equal. Define the functor $U : \qcat{D}{\sim} → \cat{Z}$ as follows:
+
+\begin{itemize}
+	\item $U(o) := Z(o)$ for $o ∈ (\qcat{D}{\sim})_1 = \cat{D}_1$
+	\item $U([a]) := Z(a)$ for $a ∈ \cat{D}_0$
+\end{itemize}
+
+This is well-defined because $[a] = [b]$ ($⇔ a \sim b$) and $Z ∘ F = Z ∘ G$ imply $Z(a) = Z(b)$. Furthermore, the functor axioms can be verified easily (we have $[a ∘ b] = [a] ∘ [b]$). Lastly, $U$ lets commute the diagram below, which follows immediately from the definition of $U$ above.
+
+\begin{tikzpicture}
+  \node (C) {$C$};
+  \node (D) [right of=C] {$\cat{D}$};
+  \node (D/) [right of=D] {$\qcat{D}{\sim}$};
+  \node (Z) [below of=D/] {$\cat{Z}$};
+  \draw[->, bend left] (C) to node {$F$} (D);
+  \draw[->, bend right] (C) to node {$G$} (D);
+  \draw[->] (D) to node {$π$} (D/);
+  \draw[->, dashed] (D/) to node {$U$} (Z);
+  \draw[->] (D) to node {$Z$} (Z);
+\end{tikzpicture}
+
+Any other such $U' : \qcat{D}{\sim} → \cat{Z}$ that lets the diagram commute agrees with our definition, which makes $U$ unique: $U'(o) = U(π(o)) = Z(o) (= U(o))$ and $U'([a]) = U'(π(a)) = Z(a) (= U([a]))$ for $o, a ∈ \cat{D}$. \hfill $\Box$
