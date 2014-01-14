@@ -1,0 +1,67 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{float}
+\pagestyle{plain}
+\theoremstyle{definition}
+
+\tikzset{node distance=3cm, auto}
+
+\author{Evgeny Kotelnikov}
+\title{Exercises for Chapter 5}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+  \item[4.]
+    We show equivalence by proving both directions of implication.
+
+    Let $n : N \rightarrowtail A$ and $m : M \rightarrowtail A$ be monos of $N$ and $M$ correspondingly.
+
+    \newtheorem*{a->b}{Theorem}
+    \begin{a->b}If $M \subseteq N$, then for every generalized element $z : Z \to A$ such that $z \in_A M$, $Z \in_A N$.\end{a->b}
+    \begin{proof}
+      Since $M \subseteq N$, then there is an arrow $f : M \to N$ such that \begin{equation}\label{fn=m}n \circ f = m.\end{equation} Since $z \in_A M$, then there is an arrow $g : Z \to M$ such that \begin{equation}\label{gm=z}m \circ g = z.\end{equation}
+      From \ref{fn=m} it follows that $n \circ f \circ g = m \circ g$. From \ref{gm=z} it follows that \begin{equation}\label{gfn=z}n \circ (f \circ g) = z.\end{equation}
+      From \ref{gfn=z} it follows that $z \in_A N$.
+    \end{proof}
+
+    \newtheorem*{b->a}{Theorem}
+    \begin{b->a}If for every generalized element $z : Z \to A$ such that $z \in_A M$ implies $z \in_A N$, $M \subseteq N$.\end{b->a}
+    \begin{proof}
+      Since $z \in_A M$ for all $z$, then $m \in_A M$ implies $m \in_A N$, which is equivalent to $M \subseteq N$.
+    \end{proof}
+
+  \item[6.]
+    \begin{figure}[h!]
+      \centering
+      \begin{tikzpicture}
+        \node (E)              {$E$};
+        \node (B) [right of=E] {$B$};
+        \node (A) [below of=E] {$A$};
+        \node (P) [below of=B] {$B \times B$};
+    
+        \draw[->] (E) to node {$s$} (B);
+        \draw[->] (E) to node[anchor=east] {$e$} (A);
+        \draw[->] (B) to node {$\langle 1_B, 1_B \rangle$} (P);
+        \draw[->] (A) to node[anchor=north] {$\langle f, g \rangle$} (P);
+      \end{tikzpicture}
+    \end{figure}
+
+    In order to prove, that $e$ is equalizer, we need to show that $e \circ f = e \circ g$ and there holds equalizer's UMP, that is, given any $z : Z \to A$ with $z \circ f = z \circ g$ there is unique $u : Z \to E$ with $u \circ e = z$.
+
+    \begin{enumerate}
+      \item From the definition of a pullback it follows that $e \circ f = s \circ 1_B$ and $e \circ g = s \circ 1_B$. Therefore, $e \circ f = e \circ g$.
+
+      \item Suppose there is $z : Z \to A$ such that $z \circ f = z \circ f$. Let $z' : Z \to B$ be $z' = z \circ f = z \circ g$. Applying pullback's UMP to $z$ and $z'$ we get, that there exists unique $u : Z \to E$ such that $z = u \circ e$ and $z' = u \circ s$. The first formula provides UMP of an equalizer.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}
