@@ -1,0 +1,20 @@
+% chapter=4
+% exercise=7
+% author=Fabian
+
+Assume $f \sim f'$ and $g \sim g'$ for a congruence relation $\ \sim\ $ and arrows $f, f' : A → B$, $g, g' : B → C$. Show $g ∘ f \sim g' ∘ f'$. Firstly, we verify that domains and codomains coincide:
+
+\begin{itemize}
+	\item $dom(g ∘ f) = dom(f) = dom(f') = dom(g' ∘ f')$ because $f \sim f'$
+	\item $cod(g ∘ f) = cod(g) = cod(g') = cod(g' ∘ f')$ because $g \sim g'$
+\end{itemize}
+
+Secondly, we verify that for any arrows $a : X → A, b : C → Y$, where $X$ and $Y$ are arbitrary objects, the compositions $b ∘ (g ∘ f) ∘ a$ and $b ∘ (g' ∘ f') ∘ a$ are related by $\ \sim\ $. We exploit associativity of arrow composition and use $b ∘ g$ for the meta-variable $b$ in the respective axiom instance for $f \sim f'$ as well as $f' ∘ a$ for the meta-variable $a$ when the second congruence axiom is applied to $g \sim g'$:
+
+\begin{align*}
+	& b ∘ (g ∘ f) ∘ a = (b ∘ g) ∘ f ∘ a \\
+	& \sim (b ∘ g) ∘ f' ∘ a = b ∘ g ∘ (f' ∘ a) \\
+	& \sim b ∘ g' ∘ (f' ∘ a) = b ∘ (g' ∘ f') ∘ a
+\end{align*}
+
+This concludes the proof of the claim that $g ∘ f \sim g' ∘ f'$, given $f \sim f'$ and $g \sim g'$. \hfill $\Box$
