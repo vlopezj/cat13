@@ -1,0 +1,43 @@
+% chapter=6
+% exercise=9
+% author=Fabian
+
+We give an injective and surjective mapping of each arrow $A → B$ to an arrow $1 → B^A$, where $1$ is the terminal object in the CCC under consideration. Terminal objects exist in CCC as the nullary product.
+
+First we observe that $A$ (with the projections $id_A$ and $1_A : A → 1$, which is the unique arrow into the terminal object $1$) is the product of $A$ and $1$. Given two projections $π_1 : • → A$ and $π_2 : • → 1$ the following diagram commutes since there is only a single arrow into the terminal object $1$ from $•$.
+
+\begin{tikzpicture}
+  \node (Ax1) {$•$};
+  \node (A) [right of=Ax1] {$A$};
+  \node (A') [above of=A] {$A$};
+  \node (1) [below of=A] {$1$};
+  \draw[->] (Ax1) to node {$π_1$} (A');
+  \draw[->] (Ax1) to node {$π_1$} (A);
+  \draw[->] (Ax1) to node {$1_•$} (1);
+  \draw[->] (A) to node {$id_A$} (A');
+  \draw[->] (A) to node {$1_A$} (1);
+\end{tikzpicture}
+
+Given an arrow $a : A → B$ in a CCC we have the exponential of $A$ and $B$ such that the diagram below, which shows the transpose $\tilde{a} : 1 → B^A$ of $a$ and the evaluation $ε : A × B^A → B$, commutes.
+
+\begin{tikzpicture}
+  \node (A) {$A$};
+  \node (AxBA) [below of=A] {$A × B^A$};
+  \node (B) [right of=AxBA] {$B$};
+  \draw[->] (A) to node {$a$} (B);
+  \draw[->] (A) to node [left] {$1_A × \tilde{a}$} (AxBA);
+  \draw[->] (AxBA) to node {$ε$} (B);
+\end{tikzpicture}
+
+We map $a$ to $\tilde{a}$ for our purposes. This mapping is injective, as we will argue now. Given another $b : A → B$ which gets mapped to the same arrow $\tilde{a}$ lets the next diagram commute because $\tilde{a}$ equals $\tilde{b}$ by assumption.
+
+\begin{tikzpicture}
+  \node (A) {$A$};
+  \node (AxBA) [below of=A] {$A × B^A$};
+  \node (B) [right of=AxBA] {$B$};
+  \draw[->] (A) to node {$b$} (B);
+  \draw[->] (A) to node [left] {$1_A × \tilde{a}$} (AxBA);
+  \draw[->] (AxBA) to node {$ε$} (B);
+\end{tikzpicture}
+
+Therefore, $b = ε ∘ 1_A × \tilde{a} = a$ holds. Furthermore, the mapping above is surjective. Suppose an arrow $α : 1 → B^A$ is given. We show that $a := ε ∘ 1_A × α : A → B$ is mapped to $α$. To this end, we verify that $\tilde{a} = α$, which follows directly from the UMP of the exponential: $a = ε ∘ 1_A × α$ holds by definition already and, hence, $α$ lets the exponential diagram of $a$ commute. \hfill $\Box$
