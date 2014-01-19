@@ -1,0 +1,50 @@
+% chapter=3
+% exercise=13
+% author=Fabian
+
+\begin{enumerate}
+	\item Let $R_a$ and $R_b$ the equivalence relations defined in a) and b) respectively. Show $x ∈ R_a ⇔ x ∈ R_b$.
+
+		Firstly, assume $n \sim_{R_a} n'$. Then it holds that for all monoid homomorphisms $h : N → X$, which fulfill the equality $h ∘ f = h ∘ g$, $h(n)$ equals $h(n')$. We substitute the projection $π_{R_b} : N → \faktor{N}{R_b}$ ($\faktor{N}{R_b}$ is indeed a monoid as we will see in the second part) for $h$ in the latter condition. Since $f(m) \sim_{R_b} g(m)$ for all $m ∈ M$, $f(m)$ and $g(m)$ are always mapped to the same equivalence class by $π_{R_b}$ so that $h(f(m)) = h(g(m))$ holds for all $m ∈ M$ and we conclude $h ∘ f = h ∘ g$. The condition for $n \sim_{R_a} n'$ now dictates $π_{R_b}(n) = π_{R_b}(n')$ and, therefore, $n$ and $n'$ are in the same equivalence class of $R_b$. Finally, we conclude the claim $n \sim_{R_b} n'$.
+
+		Secondly, assume $n \sim_{R_b} n'$ and, furthermore, $h ∘ f = h ∘ g$ for an arbitrary $h : N → X$. We show $h(n) = h(n')$ and, hence, $n \sim_{R_a} n'$. The reflexive, symmetric and transitive closure of the two conditions given in the text is the intersection of all equivalence relations satisfying those conditions (!). We prove $h(n) = h(n')$ by structural induction on the construction of $R_b$.
+
+		\begin{itemize}
+			\item There is an $m ∈ M$ such that $n = f(m)$ and $n' = g(m)$: $h(n) = h(f(m)) = h(g(m)) = h(n')$
+			\item There are $n_1, n_2, n_1', n_2' ∈ N$ such that $n_1 ·_N n_2 = n$ and $n_1' ·_N n_2' = n'$ as well as $n_1 \sim_{R_b} n_1'$ and $n_2 \sim_{R_b} n_2'$:
+				$$h(n) = h(n_1 · n_2) = h(n_1) ·_X h(n_2) = h(n_1') ·_X h(n_2') = h(n_1' ·_N n_2') = h(n')$$ by the induction hypothesis and monoid homomorphism axioms
+			\item $n = n'$ holds (reflexivity): $h(n) = h(n')$ by congruence
+			\item $n' \sim_{R_b} n$ holds (symmetry): $h(n) = h(n')$ by the induction hypothesis and symmetry of $\ = \ $
+			\item There is an $n'' ∈ N$ such that $n \sim_{R_b} n'' \sim_{R_b} n'$: $h(n) = h(n'') = h(n')$ by induction hypothesis and transitivity of $\ =\ $
+		\end{itemize}
+
+		Therefore, $R_a = R_b$. In the following the latter is referred to as $\ \sim\ $.
+	\item We show that $\faktor{N}{\ \sim\ }$ is a monoid by arguing that $· : ([x],[y]) ↦ [x ·_N y]$ is a well-defined and associative operation on $\faktor{N}{\ \sim\ }$ (associativity follows from the associativity of the operation on $N$) and that $[1_N]$ is a neutral element. Let $x \sim_R x'$ and $y \sim_R y'$ for arbitrary $x, x', y, y' ∈ N$. Then, $[x] · [y] := [x ·_N y]$ is well-defined because $x ·_N y \sim x' ·_N y'$, which follows from the definition of $R_b$. Furthermore, it defines an operation since $x ·_N y ∈ N$ and therefore $[x ·_N y] ∈ \faktor{N}{\ \sim\ }$. Lastly, $[x] · [1_N] = [x ·_N 1_N] = [x]$ by definition of $·$ and assumption that $1_N$ is neutral with respect to $·_N$.
+
+		Now we show that $π : N → \faktor{N}{\ \sim\ }, n ↦ [n]$ is the coequalizer of $f$ and $g$. As shown before, $\faktor{N}{\ \sim\ }$ is indeed a object in $\cat{Mon}$ and obviously $·$ defines a monoid homomorphism by $π$. As seen above it is true that $π ∘ f = π ∘ g$ and it is left to show that $π$ is a morphism that lets the diagram below commute uniquely.
+
+	\begin{tikzpicture}
+	  \node (M) {$M$};
+	  \node (N) [right of=M] {$N$};
+	  \node (N') [right of=N] {$\faktor{N}{\ \sim\ }$};
+	  \draw[->, bend left] (M) to node {$f$} (N);
+	  \draw[->, bend right] (M) to node {$g$} (N);
+	  \draw[->] (N) to node {$π$} (N');
+	\end{tikzpicture}
+
+	Therefore, let $e : N → X$ another monoid homomorphism such that $e ∘ f = e ∘ g$. Define $u : \faktor{N}{\ \sim\ } → X, [n] ↦ e(n)$ and observe $u(π(f(m)) = u(π([n])) = e(n) = e(f(m))$, where $n := f(m)$. Therefore, the diagram below commutes ($u ∘ π ∘ e = u ∘ π ∘ f = e ∘ f = e ∘ g$ follows directly from the coequalizer property and $u$ is a monoid homomorphism since $e$ is one).
+
+	\begin{tikzpicture}
+	  \node (M) {$M$};
+	  \node (N) [right of=M] {$N$};
+	  \node (N') [right of=N] {$\faktor{N}{\ \sim\ }$};
+	  \node (X) [below of=N'] {$X$};
+	  \draw[->, bend left] (M) to node {$f$} (N);
+	  \draw[->, bend right] (M) to node {$g$} (N);
+	  \draw[->] (N) to node {$π$} (N');
+	  \draw[->] (N) to node {$e$} (X);
+	  \draw[->] (N') to node {$u$} (X);
+	\end{tikzpicture}
+
+	Let $u' : \faktor{N}{\ \sim\ } → X$ another monoid homomorphism making the diagram commute. Then, $u([n]) = e(n) = u'(π(n)) = u'([n])$ for all $n ∈ N$ and $u = u'$. Therefore, $π$ is the coequalizer of $f$ and $g$. \hfill $\Box$
+\end{enumerate}
