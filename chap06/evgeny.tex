@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{float}
+\pagestyle{plain}
+\theoremstyle{definition}
+
+\tikzset{node distance=3cm, auto}
+
+\author{Evgeny Kotelnikov}
+\title{Exercises for Chapter 6}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+  \item[3.]
+    Straightforwardly from the definition of an exponential:
+    \begin{enumerate}
+      \item $\tilde{e} : B^A \to B^A = 1_{B^A}$,
+      \item $\tilde{1} : A \to (A \times B)^B$,
+      \item $\tilde{\epsilon \circ \tau} : A \to B^{B^A}$.
+    \end{enumerate}
+
+  \item[9.]
+    In $\lambda$-calculus terms we are basically asked to show that for every types $A$ and $B$ there exists a pair function between types $\mathbf{Unit} \to A \to B $ and $A \to B$. Such pair of functions is $\lambda f : \mathbf{Unit} \to A \to B. f(1)$ and $\lambda f : A \to B. \lambda u : \mathbf{Unit}. f$ with $1$ being inhabitant of $\mathbf{Unit}$ type (corresponding to terminal object of the category).
+
+\end{enumerate}
+
+\end{document}

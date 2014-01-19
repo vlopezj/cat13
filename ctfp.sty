@@ -1,11 +1,12 @@
 \usepackage{amssymb,amsmath}
 \usepackage{tikz}
 \usepackage{unicode-math}
+\usepackage{faktor}
 
 \tikzset{node distance=2cm, auto}
 
 \newcommand{\cat}[1]{\mathcal{#1}}
-\newcommand{\qcat}[2]{\cat{#1}/#2}
+\newcommand{\qcat}[2]{\faktor{#1}{#2}}
 
 \newcommand{\tuple}[2]{\langle#1,#2\rangle}
 \newcommand{\fst}[1]{\textsf{fst}(#1)}

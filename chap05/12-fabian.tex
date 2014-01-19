@@ -1,0 +1,55 @@
+% chapter=5
+% exercise=12
+% author=Fabian
+
+The colimit of the sequence $[0] \overset{ι_{0,1}}{→} [1] \overset{ι_{1,2}}{→} [2] \overset{ι_{2,3}}{→} …$ in $\cat{Poset}$ is $\tuple{ℕ}{≤}$ and the limit is $[0]$ with the evident inclusions $ι_{[i],ℕ}$ of $[i]$ in $\tuple{ℕ}{≤}$ and $[0]$ in $[i]$ (by $ι_{[0],[i]}$) for any $i ≥ 0$. We show that our candidates are indeed initial and terminal objects in $\cat{Cocone(Poset)}$ and $\cat{Cone(Poset)}$ respectively.
+
+Let $\tuple{C}{c_i}$ any cocone in $\cat{Cocone(Poset)}$. Define $φ : \tuple{ℕ}{≤} → C, i ↦ c_i(i)$.
+
+\begin{enumerate}
+	\item If $i ≤ j$, then $φ(i) = c_i(i) ≤ c_i(j) = (ι_{i,j} ∘ c_i)(i) = c_j(j) = φ(j)$ so that $φ$ is a morphism in $\cat{Poset}$
+	\item $φ(ι_{[i],ℕ}(k)) = φ(k) = c_{k}(k) = ι_{k,i}(c_k(k)) = c_i(k)$ so that $φ$ is a morphism in $\cat{Cocone(Poset)}$
+	\item For any other cocone morphism $φ' : \tuple{ℕ}{≤} → C$: $φ'(i) = φ'(ι_{[0],ℕ}(i)) = c_{0}(i) = φ(ι_{[0],ℕ}(i)) = φ(i)$ so that $φ$ is a unique such morphism
+\end{enumerate}
+
+In diagrams: $φ$ lets the following diagram in $\cat{Poset}$ (uniquely for all cocones) commute.
+
+\begin{tikzpicture}
+  \node (C) {$C$};
+  \node (N) [right of=C] {$ℕ$};
+  \node (k) [above of=C] {$[k]$};
+  \node (d) [right of=k] {$…$};
+  \node (i) [right of=d] {$[i]$};
+  \draw[->] (N) to node {$φ$} (C);
+  \draw[->] (i) to node {$c_i$} (C);
+  \draw[->] (k) to node {$c_k$} (C);
+  \draw[->] (i) to node {$ι_{[i],ℕ}$} (N);
+  \draw[->] (k) to node {$ι_{k,k+1}$} (d);
+  \draw[->] (d) to node {$ι_{i-1,i}$} (i);
+\end{tikzpicture}
+
+Hence, $\tuple{ℕ}{≤}$ is the initial object in $\cat{Cocone(Poset)}$ and, thereby, the claimed colimit poset.
+
+Moreover, let $\tuple{C}{c_i}$ any cone in $\cat{Cone(Poset)}$ and define $φ : C → [0], c ↦ 0$.
+
+\begin{enumerate}
+	\item If $c ≤ d$, then $φ(c) = 0 ≤ 0 = φ(d)$ so that $φ$ is a morphism in $\cat{Poset}$
+	\item $ι_{[0],[i]}(φ(c)) = ι_{[0],[i]}(0) = 0 = c_0(c) = ι_{0,i}(c_0(c)) = c_i(c)$ so that $φ$ is a morphism in $\cat{Cone(Poset)}$
+	\item For any other cone morphism $φ' : C → [0]$: $φ'(c) = ι_{[0],[0]}(φ'(c)) = c_{0}(c) = 0 = φ(c)$ so that $φ$ is a unique such morphism
+\end{enumerate}
+
+In diagrams: $φ$ lets the following diagram in $\cat{Poset}$ (uniquely for all cones) commute.
+
+\begin{tikzpicture}
+  \node (C) {$C$};
+  \node (0) [right of=C] {$[0]$};
+  \node (0') [above of=C] {$[0]$};
+  \node (i) [right of=0'] {$[i]$};
+  \draw[->] (C) to node {$φ$} (0);
+  \draw[->] (C) to node {$c_i$} (i);
+  \draw[->] (C) to node {$c_0$} (0');
+  \draw[->] (0) to node [right] {$ι_{[0],[i]}$} (i);
+  \draw[->] (0') to node {$ι_{0,i}$} (i);
+\end{tikzpicture}
+
+Hence, $[0]$ is the terminal object in $\cat{Cone(Poset)}$ and, thereby, the claimed limit poset. \hfill $\Box$
