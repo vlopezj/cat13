@@ -33,6 +33,10 @@
 \begin{enumerate}
   \item[12.]
 
+    {\em Prove proposition \ref{prop:ex}. }
+
+    First, a brief reminder of boolean algebras.
+    
     A boolean algebra is a tuple $B = (\vert B \vert, ≤, ∧, ∨, ¬, ⊥, ⊤)$
     where $⊥$ and $⊤$ are distinct, and which fulfils the
     following conditions for every $a$, $b$, $c$ $ ∈ B$.
@@ -65,6 +69,9 @@
     $B \subseteq B$ is the trivial filter. 
     The set of non-trivial filters can be ordered by inclusion; a maximal element
     is an ultrafilter.
+
+    Before proving Proposition \ref{prop:ex}, we will derive
+    some generally useful properties of boolean algebras from the definition above.
     
      \begin{lemma}\label{lem:bot}
        If $F$ is a filter, $⊥ \in F$ iff $F = B$.
@@ -371,10 +378,18 @@
 
        $$¬(c ∧ d) = ¬¬(¬c ∨ ¬d) = ¬c ∨ ¬d$$
    \end{proof}
+     
+   \begin{proposition}\label{prop:ex}
+   For every boolean algebra $B$ there is a biyective correspondence
+   between ultrafilters and homomorphisms to the two-element boolean
+   algebra.
 
-   Now, we can define a one-to-one correspondence between ultrafilters,
-   and homomorphisms to the two-element boolean algebra.
+   In particular,  $h : B → \text{\bf 2}$ is an homomorphism of boolean algebras
+   if and only if $U = h^{-1}(⊤)$ is an ultrafilter in $B$.
+   
+   \end{proposition}
 
+   \begin{proof}
    \begin{enumerate}
      \item Every homomorphism $h : B → \text{\bf 2}$ corresponds to an
        ultrafilter in B.
@@ -412,9 +427,13 @@
       Now, assume that $U$ is not an ultrafilter. Then, there exists
       some filter $U^\prime$, $U^\prime \subsetneq U$, $U^\prime ≠ B$.
            
-      Let $x ∈ U^\prime \setminus U$. Then, $h(x) = ⊥$, and
-      $h(¬x) = ⊤$, so $¬x ∈ U \subset U^\prime$. This contradicts
-      lemma \ref{lem:neg}.
+      Let $x ∈ U^\prime \setminus U$. Then, $h(¬x) = ¬(h(x)) = ⊤$, so $¬x ∈ U \subset U^\prime$.
+
+      By \ref{itm:ba-not-1}, \ref{itm:ba-not-2} and \ref{lem:bot},
+      
+      $$x, ¬x ∈ U^\prime ⇒ x ∧ ¬x = ⊥ ∈ U^\prime ⇒ U^\prime = B$$
+
+      … which contradicts $U^\prime$ being non-trivial.
 
    \item Every ultrafilter $U$ in $B$ corresponds to an homomorphism $h : B → \text{\bf 2}$.
 
@@ -511,11 +530,13 @@
 
    $h_U^{-1}(⊤) = U$ and $h_{f^{-1}(⊤)} = f$ . Therefore, constructions
    are inverses of each other, and define an isomorphism.
+
+   \end{proof}
   
      
   \item[18.]
 
-    We want to represent an arbitrary monoid as a set of homomorphisms.
+    {\em Representing an arbitrary monoid as a set of homomorphisms.}
     
     Let $(\mathbb{N}, +, 0)$ be the free, commutative monoid generated
     by one element $e$.
@@ -524,18 +545,16 @@
 
 
     Let $(M,·,1)$ be a monoid. For every $m \in M$, define the
-    following mapping.
+    following morphism.
 
-    \begin{align*}
-    h_m & : & \mathbb{N} & →        & M   \\
-        &   &     k·e    & \mapsto  & m^k \\
-    \end{align*}
-
-    In particular,
+    \begin{eqnarray*}
+    h_m : &  \mathbb{N} & →         M   \\
+          &        k·e    & \mapsto   m^k \\
+    \end{eqnarray*}
 
     $$h(0) = h(0·e) = m^0 = 1$$ 
     
-    $$h_m(k·e + j·e) = h_m((k+j)·e) = m^(k+j) = m^k · m^j = h_m(k·e) + h_m(j·e)$$
+    $$h_m(k·e + j·e) = h_m((k+j)·e) = m^{(k+j)} = m^k · m^j = h_m(k·e) + h_m(j·e)$$
 
     Therefore, $h_m$ is a monoid homomorphism.
 
@@ -556,12 +575,12 @@
       Define $i_1$ and $i_2$ as arrows in {\bf Set} as follows:
       
       \begin{eqnarray*}
-        i_1  & :   Hom_{\text{\bf Mon}}(\mathbb{N}, M) &→        \vert M \vert \\      
+        i_1  : &   Hom_{\text{\bf Mon}}(\mathbb{N}, M) &→        \vert M \vert \\      
              & f                              &\mapsto   f(e)          \\
       \end{eqnarray*}
 
       \begin{eqnarray*}
-        i_2 & : \vert M \vert & →      Hom_{\text{\bf Mon}}(\mathbb{N}, M) \\
+        i_2 : &  \vert M \vert & →      Hom_{\text{\bf Mon}}(\mathbb{N}, M) \\
             &        m        & \mapsto  h_m                          \\
       \end{eqnarray*}
 
