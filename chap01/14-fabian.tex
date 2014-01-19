@@ -1,0 +1,15 @@
+%@ chapter=1
+%@ exercise=14
+%@ author=Fabian
+
+The ``arrows-only'' axioms of a category $\cat{C}$ are:
+
+\begin{enumerate}
+	\item $(k ∘ g) ∘ f$ is defined if and only if $k ∘ (g ∘ f)$ is defined. When either is defined, they are equal (and this is written as $k ∘ g ∘ f$).
+	\item $k ∘ g ∘ f$ is defined whenever both $k ∘ g$ and $g ∘ f$ are defined
+	\item For each arrow $g$ of $\cat{C}$ there exist identity arrows $u$ and $u'$ (that is $u' ∘ g = g = g ∘ u$ if they exist) of $\cat{C}$ such that $u' ∘ g$ and $g ∘ u$ are defined.
+\end{enumerate}
+
+Firstly, the arrows of a category satisfy the ``arrows-only'' axioms from above. $(k ∘ g) ∘ f$ is defined if and only if domains and codomains match if and only if $k ∘ (g ∘ f)$ is defined. Furthermore, arrow composition is associative which implies the required equality. If both $k ∘ g$ and $g ∘ f$ are defined, then the domains and codomains match and $k ∘ g ∘ f$ is defined. Moreover, for each object and in particular for the domain and codomain of $g$ there exist identity arrows $id_{dom(g)}$ and $id_{cod(g)}$ and the compositions exist since domains and codomains match.
+
+Secondly, taking the identity arrows as objects the ``arrows-only'' axioms imply the ordinary category axioms. Since the identity arrows for an arrow $g$ are unique, we can define $dom(g) = u_g$ and $cod(g) = u_g'$. Let $f, g$ two arrows such that $dom(g) = cod(f)$, that is $u_g = u_f'$, then $g ∘ u_g = g ∘ u_f'$ and $u' ∘ f$ exist and, hence, $g ∘ u_f' ∘ f = g ∘ f$ exists. For every $k, g, f$ such that $dom(k) = cod(g)$ and $dom(g) = cod(f)$ $g ∘ f$ exists and $cod(g ∘ f) = dom(k)$. Therefore, $k ∘ (g ∘ f)$ exists and is equal to $(k ∘ g) ∘ f$, which proves associativity of arrow composition. Furthermore, for any object $O$ there exists an identity arrow $u_O$ by construction such that for every $f$ with $cod(f) = O$ and $g$ with $dom(g) = O$ the identity axioms $u_O ∘ f = f$ and $g ∘ u_O = g$ are satisfied by the last ``arrows-only'' axiom.
