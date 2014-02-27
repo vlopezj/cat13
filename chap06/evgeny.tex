@@ -28,7 +28,45 @@
     \end{enumerate}
 
   \item[9.]
-    In $\lambda$-calculus terms we are basically asked to show that for every types $A$ and $B$ there exists a pair function between types $\mathbf{Unit} \to A \to B $ and $A \to B$. Such pair of functions is $\lambda f : \mathbf{Unit} \to A \to B. f(1)$ and $\lambda f : A \to B. \lambda u : \mathbf{Unit}. f$ with $1$ being inhabitant of $\mathbf{Unit}$ type (corresponding to terminal object of the category).
+    \newtheorem*{lemma}{Lemma}
+    \begin{lemma}
+      \vspace{-1.9em}
+      $$1 \times A \cong A.$$
+    \end{lemma}
+    \begin{proof}
+      Since $1 \times A$ is a product, there exists unique $u : A \to 1 \times A$ such that
+      \begin{equation}
+        \label{eq:f=pu}
+        f = \pi_1 \circ u
+      \end{equation}
+      and
+      \begin{equation*}
+        1_A = \pi_2 \circ u.
+      \end{equation*}
+      
+      \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+          \node (1)               {$1$};
+          \node (1*A) [right of=1] {$1 \times A$};
+          \node (A)   [right of=1*A] {$A$};
+          \node (A')  [below of=1*A] {$A$};
+
+          \draw[<-] (1) to node {$\pi_1$} (1*A);
+          \draw[->] (1*A) to node {$\pi_2$} (A);
+          \draw[dashed,->] (A')  to node {$f$}     (1);
+          \draw[<-] (A)   to node {$1_A$}   (A');
+          \draw[dashed,->] (A') to node {$u$} (1*A);
+        \end{tikzpicture}
+      \end{figure}
+      Composing both sides of 1 with $\pi_2$ we get $f \circ \pi_2 = \pi_1 \circ u \circ \pi_2$. At the same time, $f \circ \pi_2 = \pi_1$. Therefore, $\pi_1 = \pi_1 \circ u \circ \pi_2$ and $1_{1 \times A} = u \circ \pi_2$. We have now that $1_A = \pi_2 \circ u$ and $1_{1 \times A} = u \circ \pi_2$. From the uniqueness conditions on $u$ and $f$ (coming from the fact, that $1$ is a terminal object) we have that $u$ and $\pi_2$ are isomorphisms and $1 \times A \cong A$.
+    \end{proof}
+
+    From the lemma it immediately follows that $$\mathrm{Hom}_{\mathbf{C}}(1 \times A, B) \cong \mathrm{Hom}_{\mathbf{C}}(A, B).$$
+
+    From the property of $1 \to B^A$ exponential (Awodey, 6.1) we have $$\mathrm{Hom}_{\mathbf{C}}(1 \times A, B) \cong \mathrm{Hom}_{\mathbf{C}}(1, B^A).$$
+
+    By transitiviy $$\mathrm{Hom}_{\mathbf{C}}(A, B) \cong \mathrm{Hom}_{\mathbf{C}}(1, B^A),$$ that is, there is a bijection between arrows $A \to B$ and $1 \to B^A$.
 
 \end{enumerate}
 
