@@ -99,7 +99,38 @@
     \end{enumerate}
 
   \item[7.]
-    Let $P$ be a projective object, that is, for any $e : E \twoheadrightarrow X$ and $f : P \to X$ there is some $\overline{g} : P \to E$ such that $e \circ \overline{g} = g$. To show that its retract $Q$ is projective, we have to prove, that for any $h : Q \to X$ there is some $\overline{h} : P \to E$ such that $e \circ \overline{h} = h$. Let $f : Q \to P$ be \emph{iso}. There holds that $g \circ f = h$ and, considering projectivity of $P$, $e \circ \overline{g} \circ f = h$. Asserting $h' = \overline{g} \circ f$ yields desired property.
+    Let $A$ be a retract of $P$, that is, there exists $r : P \to A$ and $s : A \to P$ such that \begin{equation}\label{eq:7rs=1} r \circ s = 1_A.\end{equation} To prove that it's projective we need to show that for every $e : X \twoheadrightarrow Y$ and $f : A \to Y$ there exists $\bar{f} : A \to X$ such that $e \circ \bar{f} = f$.
+
+    Let $g = f \circ r$. By projectivity of $P$ there exists $\bar{g} : P \to X$ such that $$e \circ \bar{g} = g = f \circ r.$$
+
+    Composing both sides with $s$ we get $$e \circ \bar{g} \circ s = f \circ r \circ s.$$
+
+    From 11 it follows that $$e \circ \bar{g} \circ s = f \circ 1_A = f.$$
+
+    Asserting $\bar{f} = \bar{q} \circ s$ we get $e \circ \bar{f} = f$, effectively proving desired property.
+
+    \begin{figure}
+      \centering
+      \begin{tikzpicture}
+        \node (P)              {$P$};
+        \node (A) [left of=P] {$A$};
+        \node (X) [above left of=A] {$X$};
+        \node (Y) [below left of=A] {$Y$};
+
+        \draw[->] (P) to[bend left=10] node {$r$} (A);
+        \draw[->] (A) to[bend left=10] node {$s$} (P);
+
+        \draw[<-] (Y) to node {$f$} (A);
+        \draw[->] (A) to node {$\bar{f}$} (X);
+
+        \draw[<-] (X) to node {$\bar{g}$} (P);
+        \draw[->] (P) to node {$g$} (Y);
+
+        \draw[<<-] (Y) to node {$e$} (X);
+      \end{tikzpicture}
+    \end{figure}
+
+    %Let $P$ be a projective object, that is, for any $e : E \twoheadrightarrow X$ and $f : P \to X$ there is some $\overline{g} : P \to E$ such that $e \circ \overline{g} = g$. To show that its retract $Q$ is projective, we have to prove, that for any $h : Q \to X$ there is some $\overline{h} : P \to E$ such that $e \circ \overline{h} = h$. Let $f : Q \to P$ be \emph{iso}. There holds that $g \circ f = h$ and, considering projectivity of $P$, $e \circ \overline{g} \circ f = h$. Asserting $h' = \overline{g} \circ f$ yields desired property.
 
   \item[13.]
     We will prove that products are associative up to isomorphism.
