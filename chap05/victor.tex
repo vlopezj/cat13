@@ -376,13 +376,13 @@
 
      For example:
 
-     \begin{itemize}
-       \item
+     \begin{enumerate}
+       \item[1.]
          
          $$M = \lim_{\longrightarrow} M_i = \faktor{\coprod M_i}{\sim}$$
 
-         Where $\sim$ is defined as the equivalence relation that makes
-         the following diagram commutes for every $i \in \mathbb{N}$. 
+         … where $\sim$ is defined as the equivalence relation that makes
+         the following diagram commute for every $i \in \mathbb{N}$. 
 
          \begin{tikzpicture}
            \node (Mi) {$M_i$};
@@ -444,7 +444,7 @@
 
          Therefore, $M$ is the colimit monoid.
 
-       \item
+       \item[2.]
          
          $$\lim_{\longleftarrow} M_i \cong M_0$$
 
@@ -486,7 +486,7 @@
            
          \end{tikzpicture}
 
-       \item
+       \item[3.]
 
         
          $$N_0 = \lim_{\longrightarrow} N_i$$ 
@@ -527,7 +527,7 @@
          \end{tikzpicture}
 
 
-       \item  
+       \item[4.]  
 
          $$N = \lim_{\longleftarrow} N_i = \left . {\prod N_i} \right \vert _P$$
 
@@ -579,7 +579,7 @@
          a monoid homomorphism. It's unique by universality of the
          underlying construction in {\bf Set}.
 
-     \end{itemize}
+     \end{enumerate}
      
 
      \begin{enumerate}
@@ -613,7 +613,8 @@
        \item[b.]
 
          {\em Suppose that all $M_n$ and $N_n$ are finite groups.
-           Are the four (co)limits finite groups?}
+           For each of the four (co)limits, does every element in the
+           resulting group $M$ or $N$ have finite order?}
 
          Cases 2 and 3 are trivial, because the limit is one of the
          original finite groups in the chain; all finite groups have
@@ -626,14 +627,25 @@
 
          In case 4, this is, generally, not the case.
 
-         Take the sequence $M_i = (\mathbb{Z}_{i},+,0)$ of finite abelian
-         groups. The integers modulo ${i}$ are all finite groups of
-         order $i$.
+         Take the sequence $N_i = (\mathbb{Z}_{2^{i}},+,0)$, $i = 1 … $ of finite abelian
+         groups. Define:
 
-         The infinite tuple $(1, …, 1) \in M$. However, this element
+         \begin{eqnarray*}
+           g_i : & \mathbb{Z}_{2^{i+1}} & → \mathbb{Z}_{2^{i}} \\
+                 & k \mod 2^{i+1}      & \mapsto k \mod 2^{i} \\
+         \end{eqnarray*}
+
+         Two elements which are congruent in the domain are congruent
+         in the codomain; so the $g_i$ are well defined. They also respect
+         the group operations, because they inherit those from $\mathbb{Z}$,
+         and the underlying elements are preserved by the mapping.
+         
+         The infinite tuple $(1 \mod 2, …, 1 \mod 2^{i}, …) \in N$. However, this element
          doesn't have finite order:
          
-         $$\forall k > 0 \quad k·(1, …, 1) \neq 0_M \text{ .}$$
+         $$\forall k > 0 \quad k·(1, …, 1) \neq 0_N \text{ .}$$
+
+         Observe that the $k$-th component is $k \mod (2^{k})$, and $k < 2^{k}$ for $k ≥ 1$.
          
          
      \end{enumerate}

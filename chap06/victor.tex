@@ -51,7 +51,7 @@
                
                Existence follows from the construction in this
                diagram, where $f : D \times C → A \times B$, and
-               $\bar{f}$ is the unique transpose requiered by the definition
+               $\bar{f}$ is the unique transpose required by the definition
                of exponential object.
 
                \begin{tikzpicture}[node distance=3cm]
@@ -84,11 +84,14 @@
                   \draw [->] (DxC1) to node[below] {$\bar{f}_A \times id_C$} (Ac);
                   \draw [->] (DxC2) to node {$\bar{f}_B \times id_C$} (Bc);
 
-                  \draw [->,dotted] (DxC1) to node[left] {$\bar{f}$} (AcBc);
-                  \draw [->,dotted] (DxC2) to node {$\bar{f}$} (AcBc);
+                  \draw [->,dotted] (DxC1) to node[left] {$\bar{f} × id_C$} (AcBc);
+                  \draw [->,dotted] (DxC2) to node {$\bar{f} × id_C$} (AcBc);
 
                   \draw [->] (AcBc) to node[right] {$\pi_1 \times id_C$} (Ac);
                   \draw [->] (AcBc) to node {$\pi_2 \times id_C$} (Bc);
+
+                  \draw [->,dashed,bend right] (AcBc) to node {} (A);
+                  \draw [->,dashed,bend left] (AcBc) to node {} (B);
              \end{tikzpicture}
 
                $\bar{f}_A$ and $\bar{f}_B$ are the transposes of
@@ -157,7 +160,12 @@
 
         \item[Existence] 
 
-
+          To prove that $(A^B)^C$ is an exponential object $A^{B \times C}$,
+          we need an evaluation arrow, and a unique definition
+          of the traspose function.
+            
+          These are given by the following diagram: 
+      
       \begin{tikzpicture}[node distance=3cm]
         \node (ABC) {$\left (A^B \right )^C \times (B \times C)$};
         \node (ACB) [below=1 of ABC] {$\left ( \left ( A^B \right )^C \times C \right ) \times B$};
@@ -185,15 +193,21 @@
         %\draw [->,bend left] (DBC) to node {} (ABC);
       \end{tikzpicture}
 
-      $\iota$ is the canonical isomorphism for the commutativity and
+      Some remarks:
+
+      \begin{itemize}
+        \item The diagram commutes, because so does each of the individual
+          triangles.
+          
+        \item $\iota$ is the canonical isomorphism for the commutativity and
       associativity of products. 
 
-      An overlined arrow name signifies the transpose of that function
+      \item An overlined arrow name signifies the transpose of that function
       given some exponential object. The first overlining of $f \circ ι$ corresponds to the
       exponential object $A^B$, while the second one corresponds to
       $(A^B)^C$.
 
-      Functors preserve commutativity of diagrams.
+      \item Observe that functors preserve commutativity of diagrams.
       In the case of $\left ( A^B \right )^C$, all the objects and arrows in the
       exponential object definition are mapped by the functor $(— \times B)$
 
@@ -201,21 +215,29 @@
 
       $$(— \times B)(α) = α \times id_B$$
 
+      \end{itemize}
+
+      Both the evaluation function and the transpose are present:
+      
+      \begin{itemize}
+      \item 
+
       The transpose of $f$ together with the identity arrow is:
 
       \begin{equation*}
-      \bar{f} \equiv \overline{\overline{f \circ \iota}} \times id_{B\times C} :
+      \bar{f} × id_{B × C} \equiv ι \circ \overline{\overline{f \circ \iota}} \times id_{B\times C} \circ ι:
                D × (B × C) → \left (A^B \right )^C \times (B \times C)\text{ .}
       \end{equation*}
-      
-      The evaluation function $ε$ is constructed from the underlying
+
+      \item
+      Finally, the evaluation function $ε$ is constructed from the underlying
       exponential objects.
 
       $$\epsilon_{CB} \equiv \epsilon_B \circ (\epsilon_C × id_B)$$
 
-      $$\epsilon \equiv ι  \epsilon_{CB}$$
+      $$\epsilon \equiv \epsilon_{CB} \circ ι$$
+      \end{itemize}
       
-      The diagram above commutes. 
 
       \item[Uniqueness]
 

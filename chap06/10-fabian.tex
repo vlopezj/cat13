@@ -1,0 +1,57 @@
+% chapter=6
+% exercise=10
+% author=Fabian
+
+In order to prove the category of $ω$CPOs a CCC we show that the ordinary poset product and exponential are $ω$-cocomplete. Therefore, observe the following $ω$-type diagram in $A × B$ for two $ω$CPOs $A$ and $B$.
+
+\begin{align}
+	(a_1,b_1) ≤ (a_2,b_2) ≤ (a_3,b_3) ≤ …
+\end{align}
+
+Since $(a,b) ≤ (a',b')$ in $A × B$ if and only if $a ≤ b$ and $a' ≤ b'$ there exists the colimits $a$ and $b$ of the $ω$-type diagrams below.
+
+\begin{align}
+	a_1 ≤ a_2 ≤ a_3 ≤ …
+	b_1 ≤ b_2 ≤ b_3 ≤ …
+\end{align}
+
+We verify that $(a,b)$ is the colimit in $A × B$ by recalling $(a_i,b_i) ≤ (a,b)$ because of $a_i ≤ a$ and $b_i ≤ b$ by construction. To find the colimit of an arbitrary diagram $f_1 ≤ f_2 ≤ f_3 ≤ …$ in $C^A$, the exponential of two objects $A$ and $C$, we construct for each $a$ in $A$ the colimit $f_a$ of the diagram $f_1(a) ≤ f_2(a) ≤ f_3(a) ≤ …$ in the $ω$CPO $C$ and define $f : A → C, a ↦ f_a$. The latter is indeed a diagram and $f$ is indeed a cone since $h ≤ i$ in $C^A$ for arbitrary $h, i ∈ C^A$ if and only if $h(a) ≤ i(a)$ for all $a ∈ A$. Any other cone $f'$ must satisfy $f_i(a) ≤ f'(a)$ for all $i$ and $a$ as well and since $f(a) = colim f_i(a)$ for all $a$ we have $f(a) ≤ f'(a)$ for all $a$ so that $f ≤ f'$. Hence, $f$ is the claimed colimit of $f_i$ in $C^A$.
+
+We have seen that $A × B$ and $C^A$ exist in the category of $ω$CPOs and they are constructed as they were in $\cat{Poset}$. Since the morphisms between $ω$CPOs are exactly the same as the morphisms in $\cat{Poset}$ we obtain a subcategory which is closed under product and exponential construction and, therefore, a CCC.
+
+Strict $ω$CPOs do not form a CCC. Consider the following counterexample. Let $A := 1 ≤ 2$ and $B := 1$. These are obviously $ω$CPOs with the initial object $1$.
+
+\begin{tikzpicture}
+  \node (A) {$A:$};
+  \node (1) [right of=A] {$1$};
+  \node (2) [right of=1] {$2$};
+  \node (B) [right of=2] {$B:$};
+  \node (1') [right of=B] {$1$};
+  \draw[->] (1) to node {} (2);
+\end{tikzpicture}
+
+Furthermore, the product $C × D$ in the category of $ω$CPOs is obviously a product of the two arbitrary strict $ω$CPOs $C$ and $D$ (with initial elements $\bot_C$ and $\bot_D$ respectively) in the category of strict $ω$CPOs, that is the $ω$CPO $C × D$ with the initial element $(\bot_C,\bot_D)$ and its projections in the category of strict $ω$CPOs look the same as in its non-strict variant.
+
+Now construct the exponential of $A$ and $A$, which we will denote $A^A$, as well as the transpose of the first projection of the product $A × B$ upon $A$, which we will denote $\tilde{π_1}$. Then, the following diagram commutes by the definition of exponentials.
+
+\begin{tikzpicture}
+  \node (AxB) {$A × B$};
+  \node (AxAA) [below of=AxB] {$A × A^A$};
+  \node (A) [right of=AxAA] {$A$};
+  \draw[->] (AxB) to node {$π_1$} (A);
+  \draw[->] (AxB) to node [left] {$1_A × \tilde{π_1}$} (AxAA);
+  \draw[->] (AxAA) to node {$ε$} (A);
+\end{tikzpicture}
+
+Since the morphisms are required to preserve the initial object, $\tilde{π_1}$ must be the initial object in $A^A$ and we show that $ε$ evaluates it to the constant function which returns $1$ for arguments. Therefore, we construct the transpose $\tilde{1} ∈ A^A$ for the constant function $A × B → A, (a,b) ↦ 1$.
+
+\begin{tikzpicture}
+  \node (AxB) {$A × B$};
+  \node (AxAA) [below of=AxB] {$A × A^A$};
+  \node (A) [right of=AxAA] {$A$};
+  \draw[->] (AxB) to node {$1$} (A);
+  \draw[->] (AxB) to node [left] {$1_A × \tilde{1}$} (AxAA);
+  \draw[->] (AxAA) to node {$ε$} (A);
+\end{tikzpicture}
+
+Hence, we have $(a,\tilde{π_1}) ≤ (a,\tilde{1})$ and $ε(a,\tilde{π_1}) ≤ ε(a,\tilde{1}) = 1$ for all $a ∈ A$ and we conclude that $\tilde{π_1}$ is indeed constantly evaluated to $1$ by $ε$. The latter results in the contradiction $(ε ∘ 1_A × \tilde{π_1})(2,1) = ε(2,\tilde{π_1}(1)) = 1 ≠ 2 = π_1(2,1)$. Therefore, there is no exponential $A^A$ and the category of strict $ω$CPOs is not a CCC. \hfill $\Box$

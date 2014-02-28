@@ -39,50 +39,61 @@ an isomorphism of categories?  }
         \end{tikzpicture}
     \end{description}
 
+    The product category $\text{\bf C} × \text{\bf D}$, in general, entails:
+    \begin{description}
+      \item[Objects] Pairs of objects $(A,B)$, $A ∈ \text{\bf C}$, $B ∈ \text{\bf D}$.
+      \item[Arrows]  $(f,g) : (A_1, B_1) → (A_2,B_2)$, where $f : A_1 → A_2$ and $g : B_1 → B₂$ arrows
+        in $\text{\bf C}$, $\text{\bf D}$.
+    \end{description}
+
+    In particular, notice that, for every category $\text{\bf C}$, the product
+    category $\text{\bf C} × \text{\bf C}$ can be constructed even if
+    products are not defined in $\text{\bf C}$.
+    
     The functor in the problem statement is defined as follows:
     
     \begin{equation*}
     \begin{array}{rll}
       F : & Sets/2           & → Sets × Sets              \\
-          & α : (X → 2)      & → α^{-1}(a) × α^{-1}(b)      \\
-          & \bar{f} : α → β  & → \langle f|α^{-1}(a), f|α^{-1}(b) \rangle  \\
+          & α : (X → 2)      & → ( α^{-1}(a), α^{-1}(b) )      \\
+          & \bar{f} : α → β  & → ( f|α^{-1}(a), f|α^{-1}(b) )  \\
     \end{array}
     \end{equation*}
 
-    For every $\bar{f} : α → β$, $α = β ◦ f$.
+    … where the symbol “$|$” means “restricted to”.
 
-    which means that, for both $a,\,b ∈ \text{\bf 2}$:
+    Remember that, if $\bar{f} : α → β$, $α = β ◦ f$. This means that, for both $a,\,b ∈ \text{\bf 2}$:
     
     $$ x ∈ α^{-1}(a) \Leftrightarrow α(x) = a \Leftrightarrow (β \circ f)(x) = a \Leftrightarrow f(x) ∈ β^{-1}(a)$$
     $$ x ∈ α^{-1}(b) \Leftrightarrow α(x) = b \Leftrightarrow (β \circ f)(x) = b \Leftrightarrow f(x) ∈ β^{-1}(b)$$
 
-    … therefore, the image of an arrow is actually an arrow in ${\bf Sets × Sets}$, so $F$ is well defined.
+    … therefore, $F(\bar{f}) : F(α) → F(β)$, so $F$ is well defined as a mapping.
     
     $F$ preserves identity and composition:
 
-    $$F(id_{A→2}) = id_{α^{-1}(a)×α^{-1}(b)}$$
+    $$F(id_{A→2}) = id_{(α^{-1}(a),α^{-1}(b))}$$
 
     And, if $\bar{g} : α → β$, $\bar{f} : β → γ$ …
     \begin{equation*}
     \begin{array}{rcl}
        & F(\bar{f} ◦ \bar{g})                        & = \\
-    =  & \langle (f ◦ g)|α^{-1}(a), (f ◦ g)|α^{-1}(b) \rangle        & = \\
-    =  & \langle f|β^{-1}(a) ◦ g|α^{-1}(a), f|β^{-1}(b) ◦ g|α^{-1}(b) \rangle & = \\
+    =  & ( (f ◦ g)|α^{-1}(a), (f ◦ g)|α^{-1}(b) )        & = \\
+    =  & ( f|β^{-1}(a) ◦ g|α^{-1}(a), f|β^{-1}(b) ◦ g|α^{-1}(b) ) & = \\
+    =  & ( f|β^{-1}(a) , f|β^{-1}(b) ) ◦ (g|α^{-1}(a) , g|α^{-1}(b) ) & = \\
     =  & F(\bar{f}) ◦ F(\bar{g}) & \\ 
     \end{array}
     \end{equation*}
 
-    … where the symbol $|$ means “restricted to”.
     
     However, in order for $F$ to be an isomorphism, $F$ must be biyective
     on objects. This is not the case; as $F$ is not
     surjective.
 
-    Suppose that $F$ is surjective, and a set $\langle \{1\}, \{1\} \rangle ∈ Set × Set$.
+    Suppose that $F$ is surjective, and a set $( \{1\}, \{1\} ) ∈ Set × Set$.
 
     Then, there is a set $A$, and $α : A → 2$, such that:
 
-    $$F(α) = \langle α^{-1}(a), α^{-1}(b) \rangle = \langle \{1\}, \{1\} \rangle ∈ Set × Set$$
+    $$F(α) = ( α^{-1}(a), α^{-1}(b) ) = ( \{1\}, \{1\} ) ∈ Set × Set$$
 
     This implies that $b = α(1) = a$, which is impossible. Therefore,
     $F$ is not biyective, nor an isomorphism.
@@ -174,8 +185,8 @@ where $U : Cat → Graph$ is the underlying graph functor.
         & F : C_1 → C_2 & \mapsto
             \begin{array}{rll}
               μ : & U(C_1)       & → U(C_2)                 \\
-                  & v ∈ Vertex(U(C_1))     & \mapsto F(v)                  \\
-                  & e ∈ Edge(U(C_1))       & \mapsto F(e) \\ 
+                  & v ∈ \text{vertices}(U(C_1))     & \mapsto F(v)                  \\
+                  & e ∈ \text{edges}(U(C_1))       & \mapsto F(e) \\ 
             \end{array}
             \\
     \end{array}
